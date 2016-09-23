@@ -1,0 +1,29 @@
+{
+  "name": "animated-scroll-to",
+  "version": "1.0.0",
+  "description": "Simple, plain JavaScript animated window scroll",
+  "main": "animated-scroll-to.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ./node_modules/babel-cli/bin/babel.js animated-scroll-to.es6.js --out-file animated-scroll-to.js",
+    "watch": "node ./node_modules/babel-cli/bin/babel.js --watch animated-scroll-to.es6.js --out-file animated-scroll-to.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stanko/animated-scroll-to.git"
+  },
+  "keywords": [
+    "scroll",
+    "scrollTo"
+  ],
+  "author": "Stanko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Stanko/animated-scroll-to/issues"
+  },
+  "homepage": "https://github.com/Stanko/animated-scroll-to#readme",
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-preset-es2015": "^6.9.0"
+  }
+}
