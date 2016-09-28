@@ -74,8 +74,9 @@
     }
 
     .Grey { color: #aaa; }
-    .Green { color: #A6E22E }
-    .Purple { color: #A97EF8 }
+    .Green { color: #A6E22E; }
+    .Purple { color: #A97EF8; }
+    .Yellow { color: #E6DB74; }
   </style>
   <script src="animated-scroll-to.js"></script>
 </head>
@@ -93,15 +94,35 @@
       <h1>Animated JavaScript window scroll</h1>
 
       <p>
-        Download on <a href="https://github.com/Stanko/animated-scroll-to">GitHub</a>
+        Download on <a href="https://github.com/Stanko/animated-scroll-to">GitHub</a>.
+        Or install it from npm
       </p>
+      <pre>npm install animated-scroll-to</pre>
 
       <h3>Usage</h3>
 <pre>
-<span class="Grey">// desiredOffset - page offset to scroll
-// speed - duration of the scroll per 1000px, default 500</span>
+import <span class="Green">animateScrollTo</span> from <span class="Yellow">'animated-scroll-to'</span>;
 
-<span class="Green">animateScrollTo</span>(<span class="Purple">desiredOffset</span>, <span class="Purple">speed</span>)
+<span class="Grey">// desiredOffset - page offset to scroll
+// options - object with options
+
+// default options</span>
+<span class="Green">const</span> <span class="Purple">options</span> = {
+  <span class="Grey">// duration of the scroll per 1000px, default 500</span>
+  speed: <span class="Yellow">500</span>,
+
+  <span class="Grey">// minimum duration of the scroll</span>
+  minDuration: <span class="Yellow">250</span>,
+
+  <span class="Grey">// maximum duration of the scroll</span>
+  maxDuration: <span class="Yellow">3000</span>,
+
+  <span class="Grey">// should animated scroll be canceled on user scroll/keypress</span>
+  <span class="Grey">// if set to "false" user input will be disabled until animated scroll is complete</span>
+  cancelOnUserAction: <span class="Yellow">true</span>
+};
+
+<span class="Green">animateScrollTo</span>(<span class="Purple">desiredOffset</span>, <span class="Purple">options</span>);
 </pre>
 
       <h3>What is this?</h3>

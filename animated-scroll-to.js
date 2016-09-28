@@ -1,9 +1,25 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 // desiredOffset - page offset to scroll to
 // speed - duration of the scroll per 1000px
 function animateScrollTo(desiredOffset) {
-  var speed = arguments.length <= 1 || arguments[1] === undefined ? 500 : arguments[1];
+  var userOptions = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+  var defaultOptions = {
+    speed: 500,
+    minDuration: 250,
+    maxDuration: 3000,
+    cancelOnUserAction: true
+  };
+
+  var options = {};
+
+  Object.keys(defaultOptions).forEach(function (key) {
+    options[key] = userOptions[key] ? userOptions[key] : defaultOptions[key];
+  });
 
   // get cross browser scroll position
   var initialScrollPosition = window.scrollY || document.documentElement.scrollTop;
@@ -24,27 +40,39 @@ function animateScrollTo(desiredOffset) {
   }
 
   // Calculate duration of the scroll
-  var duration = Math.abs(Math.round(diff / 1000 * speed));
+  var duration = Math.abs(Math.round(diff / 1000 * options.speed));
 
   // Set minimum and maximum duration
-  if (duration < 250) {
-    duration = 250;
-  } else if (duration > 3000) {
-    duration = 3000;
+  if (duration < options.minDuration) {
+    duration = options.minDuration;
+  } else if (duration > options.maxDuration) {
+    duration = options.maxDuration;
   }
 
   var startingTime = Date.now();
 
-  // Method to disable scroll
-  var disableScroll = function disableScroll(e) {
-    e.preventDefault();
-  };
-  // Disable user scroll while animating scroll
-  window.addEventListener('scroll', disableScroll);
-  window.addEventListener('wheel', disableScroll);
-  window.addEventListener('touchstart', disableScroll);
-
+  // Request animation frame ID
   var requestID = null;
+
+  // Method handler
+  var handleUserEvent = null;
+
+  if (options.cancelOnUserAction) {
+    // Set handler to cancel scroll on user action
+    handleUserEvent = function handleUserEvent(e) {
+      cancelAnimationFrame(requestID);
+    };
+    window.addEventListener('keydown', handleUserEvent);
+  } else {
+    // Set handler to prevent user actions while scroll is active
+    handleUserEvent = function handleUserEvent(e) {
+      e.preventDefault();
+    };
+    window.addEventListener('scroll', handleUserEvent);
+  }
+
+  window.addEventListener('wheel', handleUserEvent);
+  window.addEventListener('touchstart', handleUserEvent);
 
   var step = function step() {
     var timeDiff = Date.now() - startingTime;
@@ -66,13 +94,20 @@ function animateScrollTo(desiredOffset) {
       window.scrollTo(0, desiredOffset);
       cancelAnimationFrame(requestID);
 
-      // Enable user scroll again
-      window.removeEventListener('scroll', disableScroll);
-      window.removeEventListener('wheel', disableScroll);
-      window.removeEventListener('touchstart', disableScroll);
+      // Remove listeners
+      window.removeEventListener('wheel', handleUserEvent);
+      window.removeEventListener('touchstart', handleUserEvent);
+
+      if (options.cancelOnUserAction) {
+        window.removeEventListener('keydown', handleUserEvent);
+      } else {
+        window.removeEventListener('scroll', handleUserEvent);
+      }
     }
   };
 
   // Start animating scroll
   requestID = requestAnimationFrame(step);
 }
+
+exports.default = animateScrollTo;

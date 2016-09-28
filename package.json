@@ -1,6 +1,6 @@
 {
   "name": "animated-scroll-to",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple, plain JavaScript animated window scroll",
   "main": "animated-scroll-to.js",
   "scripts": {
