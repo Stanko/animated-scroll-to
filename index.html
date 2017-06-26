@@ -10,7 +10,8 @@
       margin: 0;
       padding: 0;
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      color: #40474f;
+      color: #111;
+      font-size: 18px;
     }
 
     h1,
@@ -20,48 +21,86 @@
       margin: 1.5em 0;
     }
 
+    h1 {
+      margin-top: 15px;
+    }
+
     p {
       line-height: 1.4em;
-      color: #70777f;
+      color: #555;
     }
 
     a,
-    a:hover,
+    a:active,
+    a:visited,
     a:focus {
-      color: #111;
+      color: #bD2828;
+    }
+
+    a:hover {
+      color: #841010;
     }
 
     .Buttons {
-      padding: 0 20px;
+      padding: 5px 20px;
       position: fixed;
-      line-height: 50px;
+      width: 100%;
+      top: 0;
+      left: 0;
+      border-bottom: 1px solid #ddd;
+      background: #FAFAFA;
     }
 
-    .Buttons button {
-      background: #fdfdfd;
-      border: 1px solid #333;
-      height: 20px;
-      border-radius: 4px;
+    .Buttons span {
+      display: inline-block;
+      position: relative;
+      top: 1px;
+      margin-right: 5px;
+    }
+
+    button {
+      height: 25px;
+      border: 1px solid #ddd;
+      background: #fff;
+      border-radius: 12px;
+      padding: 0 10px
+    }
+
+    button:hover {
+      border-color: #aaa;
+      cursor: pointer;
     }
 
     .Page {
       min-height: 1500px;
-      background: #234;
-      background: -webkit-linear-gradient(top,  #f5f6f7 0%, #abc 100%);
-      background:    -moz-linear-gradient(top,  #f5f6f7 0%, #abc 100%);
-      background:         linear-gradient(to bottom,  #f5f6f7 0%, #abc 100%);
+      background: #FAFAFA;
     }
 
     .Page--withText {
       line-height: 1500px;
       font-size: 100px;
       text-align: center;
+      background: #234;
+      background: -webkit-linear-gradient(top,  #fff 0%, #ddd 100%);
+      background:    -moz-linear-gradient(top,  #fff 0%, #ddd 100%);
+      background:         linear-gradient(to bottom,  #fff 0%, #ddd 100%);
     }
 
     .Container {
-      padding: 50px 20px;
-      max-width: 600px;
+      padding: 70px 20px 50px;
+      max-width: 800px;
       margin: 0 auto;
+    }
+
+    .ElementDemo {
+      height: 200px;
+      overflow-y: auto;
+      color: #222;
+      background: #ffffff;
+      padding: 0 20px;
+      border-radius: 4px;
+      margin-top: 20px;
+      border: 1px solid #ddd;
     }
 
     pre {
@@ -73,6 +112,11 @@
       overflow-x: auto;
     }
 
+    .Links a {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
     .Grey { color: #aaa; }
     .Green { color: #A6E22E; }
     .Purple { color: #A97EF8; }
@@ -82,7 +126,7 @@
 </head>
 <body>
   <div class="Buttons">
-    Scroll to
+    <span>Scroll to</span>
     <button onclick="animateScrollTo(0)">0</button>
     <button onclick="animateScrollTo(100)">100</button>
     <button onclick="animateScrollTo(1500)">1500</button>
@@ -91,39 +135,22 @@
   </div>
   <div class="Page">
     <div class="Container">
-      <h1>Animated JavaScript window scroll</h1>
+      <div class="Links">
+        <a href="https://stanko.github.io/">My Blog</a>
+        <a href="https://github.com/Stanko/animated-scroll-to">
+          GitHub
+        </a>
+        <a href="https://www.npmjs.com/package/animated-scroll-to">
+          npm
+        </a>
+      </div>
+      <h1>Animated JavaScript window and element scrollTo</h1>
 
       <p>
-        Download on <a href="https://github.com/Stanko/animated-scroll-to">GitHub</a>.
-        Or install it from npm
+        Documentation on <a href="https://github.com/Stanko/animated-scroll-to">GitHub</a>.
+        Install it from npm, or grab javascipt file from GitHub (not recommended).
       </p>
       <pre>npm install animated-scroll-to</pre>
-
-      <h3>Usage</h3>
-<pre>
-import <span class="Green">animateScrollTo</span> from <span class="Yellow">'animated-scroll-to'</span>;
-
-<span class="Grey">// desiredOffset - page offset to scroll
-// options - object with options
-
-// default options</span>
-<span class="Green">const</span> <span class="Purple">options</span> = {
-  <span class="Grey">// duration of the scroll per 1000px, default 500</span>
-  speed: <span class="Yellow">500</span>,
-
-  <span class="Grey">// minimum duration of the scroll</span>
-  minDuration: <span class="Yellow">250</span>,
-
-  <span class="Grey">// maximum duration of the scroll</span>
-  maxDuration: <span class="Yellow">3000</span>,
-
-  <span class="Grey">// should animated scroll be canceled on user scroll/keypress</span>
-  <span class="Grey">// if set to "false" user input will be disabled until animated scroll is complete</span>
-  cancelOnUserAction: <span class="Yellow">true</span>
-};
-
-<span class="Green">animateScrollTo</span>(<span class="Purple">desiredOffset</span>, <span class="Purple">options</span>);
-</pre>
 
       <h3>What is this?</h3>
       <p>
@@ -135,42 +162,82 @@ import <span class="Green">animateScrollTo</span> from <span class="Yellow">'ani
         Also it disables user scrolling while scroll animation is in progress.
       </p>
 
-      <p>
-        Script doesn't prevent multiple calls of it.
-      </p>
+      <h3>Demo</h3>
+      <b>Window</b>
+      <p>Use buttons at the top of the page to scroll window</p>
 
-      <p>
-        It is written using ES6 JavaScript, but transpiled version is included as well.
-        To build it yourself you'll need to install npm dependencies.
-      </p>
+      <b>Custom DOM element</b>
+      <p>Use buttons beneath to scroll element</p>
 
-<pre>
-<span class="Grey"># Run only for the first time</span>
-npm install
+      <button onclick="animateScrollTo(0, { element: document.querySelector('.ElementDemo') })">0</button>
+      <button onclick="animateScrollTo(100, { element: document.querySelector('.ElementDemo') })">100</button>
+      <button onclick="animateScrollTo(200, { element: document.querySelector('.ElementDemo') })">200</button>
+      <button onclick="animateScrollTo(500, { element: document.querySelector('.ElementDemo') })">500</button>
+      <button onclick="animateScrollTo(1000, { element: document.querySelector('.ElementDemo') })">1000</button>
 
-<span class="Grey"># Transpiles ES6 to ES5</span>
-npm run build
-
-<span class="Grey"># Watches ES6 file for changes and transpiles on the fly</span>
-npm run watch
-</pre>
-
-      <h3>Why?</h3>
-      <p>
-        I wasn't able to find standalone, simple and working solution.
-      </p>
-
-      <h3>Browser support</h3>
-      <p>
-        Anything that supports "requestAnimationFrame", meaning IE10+.
-        If you want to use it on the older IEs, just provide a polyfill for it.
-      </p>
-
-      <h3>It is missing &lt;insert feature here&gt;</h3>
-      <p>
-        I really tried to keep simple and lightweight.
-        If you are missing something, feel free to add it and open a pull request.
-      </p>
+      <div class="ElementDemo">
+        <p>Use buttons above to scroll this element</p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Nullam facilisis feugiat leo vel tempor. Nullam mollis tortor quis
+          fringilla ultricies. Vivamus eu libero malesuada orci sagittis
+          feugiat. Nulla cursus tempor velit, vitae pellentesque ex placerat
+          faucibus. Fusce elementum ante eget nulla condimentum, non efficitur
+          erat venenatis. Aliquam nunc diam, tincidunt eget arcu sed, feugiat
+          laoreet dolor. Nulla in laoreet odio. Ut nec egestas enim. Nam
+          vestibulum pretium laoreet. Nam magna magna, dignissim volutpat augue
+          non, imperdiet feugiat odio.
+        </p>
+        <p>
+          Vivamus suscipit fermentum lorem, sit amet lacinia ex accumsan nec.
+          Vivamus iaculis, neque sed auctor congue, risus ipsum laoreet odio,
+          eu mollis dolor justo elementum dui. Praesent facilisis eleifend
+          mattis. Aliquam ut erat dictum, aliquet ligula et, commodo felis.
+          Nullam non venenatis lorem. Donec consectetur lectus a consectetur
+          porta. Phasellus vel commodo tellus. Donec egestas rutrum semper.
+        </p>
+        <p>
+          Suspendisse ac luctus velit. Proin nunc erat, placerat sit amet
+          consectetur nec, dictum sit amet velit. Nulla semper nibh sit amet
+          sem fermentum, pretium placerat augue rutrum. Proin tellus lorem,
+          sodales nec lacus eu, auctor euismod neque. Praesent rutrum elit eu
+          magna pulvinar, quis hendrerit tortor dapibus. Etiam fringilla
+          molestie dui ut suscipit. Aenean quam nisl, imperdiet nec egestas
+          sed, congue eu orci. Cras vehicula auctor diam at sodales.
+          Nulla blandit faucibus ex, id lacinia neque ornare vitae.
+          Pellentesque a felis neque.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Nullam facilisis feugiat leo vel tempor. Nullam mollis tortor quis
+          fringilla ultricies. Vivamus eu libero malesuada orci sagittis
+          feugiat. Nulla cursus tempor velit, vitae pellentesque ex placerat
+          faucibus. Fusce elementum ante eget nulla condimentum, non efficitur
+          erat venenatis. Aliquam nunc diam, tincidunt eget arcu sed, feugiat
+          laoreet dolor. Nulla in laoreet odio. Ut nec egestas enim. Nam
+          vestibulum pretium laoreet. Nam magna magna, dignissim volutpat augue
+          non, imperdiet feugiat odio.
+        </p>
+        <p>
+          Vivamus suscipit fermentum lorem, sit amet lacinia ex accumsan nec.
+          Vivamus iaculis, neque sed auctor congue, risus ipsum laoreet odio,
+          eu mollis dolor justo elementum dui. Praesent facilisis eleifend
+          mattis. Aliquam ut erat dictum, aliquet ligula et, commodo felis.
+          Nullam non venenatis lorem. Donec consectetur lectus a consectetur
+          porta. Phasellus vel commodo tellus. Donec egestas rutrum semper.
+        </p>
+        <p>
+          Suspendisse ac luctus velit. Proin nunc erat, placerat sit amet
+          consectetur nec, dictum sit amet velit. Nulla semper nibh sit amet
+          sem fermentum, pretium placerat augue rutrum. Proin tellus lorem,
+          sodales nec lacus eu, auctor euismod neque. Praesent rutrum elit eu
+          magna pulvinar, quis hendrerit tortor dapibus. Etiam fringilla
+          molestie dui ut suscipit. Aenean quam nisl, imperdiet nec egestas
+          sed, congue eu orci. Cras vehicula auctor diam at sodales.
+          Nulla blandit faucibus ex, id lacinia neque ornare vitae.
+          Pellentesque a felis neque.
+        </p>
+      </div>
     </div>
   </div>
   <div class="Page Page--withText">1</div>
