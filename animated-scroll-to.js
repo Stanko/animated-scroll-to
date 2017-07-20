@@ -12,6 +12,7 @@
       maxDuration: 1500,
       cancelOnUserAction: true,
       element: window,
+      onComplete: undefined,
     };
 
     var options = {};
@@ -121,6 +122,11 @@
           window.removeEventListener('keydown', handleUserEvent);
         } else {
           window.removeEventListener('scroll', handleUserEvent);
+        }
+
+        // Animation is complete, execute callback if there is any
+        if (options.onComplete && typeof options.onComplete === 'function') {
+          options.onComplete()
         }
       }
     };
