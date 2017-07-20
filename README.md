@@ -64,7 +64,10 @@ const options = {
 
   // should animated scroll be canceled on user scroll/keypress
   // if set to "false" user input will be disabled until animated scroll is complete
-  cancelOnUserAction: true
+  cancelOnUserAction: true,
+
+  // function that will be executed when the scroll animation is finished
+  onComplete: function() {}
 };
 
 const desiredOffset = 1000;
