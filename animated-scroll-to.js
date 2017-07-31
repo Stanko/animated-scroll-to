@@ -51,6 +51,11 @@
 
     // Do nothing if the page is already there
     if (diff === 0) {
+      // Execute callback if there is any
+      if (options.onComplete && typeof options.onComplete === 'function') {
+        options.onComplete()
+      }
+
       return;
     }
 
