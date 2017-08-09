@@ -6,6 +6,10 @@
   function __ANIMATE_SCROLL_TO(desiredOffset) {
     var userOptions = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
+    if(desiredOffset instanceof HTMLElement){
+      desiredOffset = document.body.scrollTop + desiredOffset.getBoundingClientRect().top
+    }
+
     var defaultOptions = {
       speed: 500,
       minDuration: 250,

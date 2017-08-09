@@ -15,6 +15,7 @@ Then function recalculates the duration,
 and sets the minimum of 250ms or maximum of 3000ms.
 If you give it offset which is larger from the maximum scroll value, it will use latter.
 Also it disables user scrolling while scroll animation is in progress.
+And also, you can give it HTML DOM Element to scroll to.
 
 Script doesn't prevent multiple calls of it.
 
@@ -36,6 +37,10 @@ and call it when you need it
 
 ```javascript
 animateScrollTo(500);
+
+or
+
+animateScrollTo(document.querySelector('.my-element'));
 ```
 
 You can also use the standalone build, by including `animated-scroll-to.js` in your page, but it is not recommended.
