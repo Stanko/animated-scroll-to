@@ -8,7 +8,7 @@
 
     if (desiredOffset instanceof HTMLElement) {
       var scrollTop = window.scrollY || document.documentElement.scrollTop;
-      desiredOffset = scrollTop + desiredOffset.getBoundingClientRect().top
+      desiredOffset = scrollTop + desiredOffset.getBoundingClientRect().top;
     }
 
     var defaultOptions = {
