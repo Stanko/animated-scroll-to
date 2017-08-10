@@ -7,7 +7,8 @@
     var userOptions = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
     if(desiredOffset instanceof HTMLElement){
-      desiredOffset = document.body.scrollTop + desiredOffset.getBoundingClientRect().top
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      desiredOffset = scrollTop + desiredOffset.getBoundingClientRect().top
     }
 
     var defaultOptions = {
