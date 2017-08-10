@@ -6,8 +6,8 @@
   function __ANIMATE_SCROLL_TO(desiredOffset) {
     var userOptions = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-    if(desiredOffset instanceof HTMLElement){
-      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    if (desiredOffset instanceof HTMLElement) {
+      var scrollTop = window.scrollY || document.documentElement.scrollTop;
       desiredOffset = scrollTop + desiredOffset.getBoundingClientRect().top
     }
 
