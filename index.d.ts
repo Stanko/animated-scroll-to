@@ -3,5 +3,5 @@
 // Definitions by: Stanko <https://github.com/Stanko/>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-declare function animateScrollTo(desiredOffset: number, options?: object):void;
+declare function animateScrollTo(desiredOffset: number | HTMLElement, options?: object):void;
 export default animateScrollTo;

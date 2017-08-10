@@ -86,6 +86,14 @@
       background:         linear-gradient(to bottom,  #fff 0%, #ddd 100%);
     }
 
+    .Page--withElement {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 46px;
+      min-height: 100vh !important ;
+    }
+
     .Container {
       padding: 70px 20px 50px;
       max-width: 800px;
@@ -132,6 +140,7 @@
     <button onclick="animateScrollTo(1500)">1500</button>
     <button onclick="animateScrollTo(6000)">6k</button>
     <button onclick="animateScrollTo(20000)">20k</button>
+    <button onclick="animateScrollTo(document.querySelector('.Page--withElement'))">To element</button>
   </div>
   <div class="Page">
     <div class="Container">
@@ -246,6 +255,7 @@
   <div class="Page Page--withText">4</div>
   <div class="Page Page--withText">5</div>
   <div class="Page Page--withText">6</div>
+  <div class="Page Page--withElement">Page with element</div>
   <div class="Page Page--withText">7</div>
   <div class="Page Page--withText">8</div>
   <div class="Page Page--withText">9</div>
