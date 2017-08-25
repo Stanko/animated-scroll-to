@@ -7,8 +7,13 @@
     var userOptions = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
     if (desiredOffset instanceof HTMLElement) {
-      var scrollTop = window.scrollY || document.documentElement.scrollTop;
-      desiredOffset = scrollTop + desiredOffset.getBoundingClientRect().top;
+      if (userOptions.element && userOptions.element instanceof HTMLElement) {
+        desiredOffset = (desiredOffset.getBoundingClientRect().top + userOptions.element.scrollTop)
+          - userOptions.element.getBoundingClientRect().top;
+      } else {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        desiredOffset = scrollTop + desiredOffset.getBoundingClientRect().top;
+      }
     }
 
     var defaultOptions = {
