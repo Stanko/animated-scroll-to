@@ -94,6 +94,7 @@
         cancelAnimationFrame(requestID);
       };
       window.addEventListener('keydown', handleUserEvent);
+      window.addEventListener('mousedown', handleUserEvent);
     } else {
       // Set handler to prevent user actions while scroll is active
       handleUserEvent = function(e) { e.preventDefault(); };
@@ -109,6 +110,7 @@
 
       if (options.cancelOnUserAction) {
         window.removeEventListener('keydown', handleUserEvent);
+        window.removeEventListener('mousedown', handleUserEvent);
       } else {
         window.removeEventListener('scroll', handleUserEvent);
       }
