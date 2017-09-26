@@ -100,6 +100,17 @@
     window.addEventListener('wheel', handleUserEvent);
     window.addEventListener('touchstart', handleUserEvent);
 
+    var removeListeners = function () {
+      window.removeEventListener('wheel', handleUserEvent);
+      window.removeEventListener('touchstart', handleUserEvent);
+
+      if (options.cancelOnUserAction) {
+        window.removeEventListener('keydown', handleUserEvent);
+      } else {
+        window.removeEventListener('scroll', handleUserEvent);
+      }
+    };
+
     var step = function () {
       var timeDiff = Date.now() - startingTime;
       var t = (timeDiff / duration) - 1;
@@ -130,14 +141,7 @@
         cancelAnimationFrame(requestID);
 
         // Remove listeners
-        window.removeEventListener('wheel', handleUserEvent);
-        window.removeEventListener('touchstart', handleUserEvent);
-
-        if (options.cancelOnUserAction) {
-          window.removeEventListener('keydown', handleUserEvent);
-        } else {
-          window.removeEventListener('scroll', handleUserEvent);
-        }
+        removeListeners();
 
         // Animation is complete, execute callback if there is any
         if (options.onComplete && typeof options.onComplete === 'function') {
