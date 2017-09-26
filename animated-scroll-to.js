@@ -89,7 +89,10 @@
 
     if (options.cancelOnUserAction) {
       // Set handler to cancel scroll on user action
-      handleUserEvent = function() { cancelAnimationFrame(requestID); };
+      handleUserEvent = function() {
+        removeListeners();
+        cancelAnimationFrame(requestID);
+      };
       window.addEventListener('keydown', handleUserEvent);
     } else {
       // Set handler to prevent user actions while scroll is active
