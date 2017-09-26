@@ -89,8 +89,12 @@
 
     if (options.cancelOnUserAction) {
       // Set handler to cancel scroll on user action
-      handleUserEvent = function() { cancelAnimationFrame(requestID); };
+      handleUserEvent = function() {
+        removeListeners();
+        cancelAnimationFrame(requestID);
+      };
       window.addEventListener('keydown', handleUserEvent);
+      window.addEventListener('mousedown', handleUserEvent);
     } else {
       // Set handler to prevent user actions while scroll is active
       handleUserEvent = function(e) { e.preventDefault(); };
@@ -99,6 +103,18 @@
 
     window.addEventListener('wheel', handleUserEvent);
     window.addEventListener('touchstart', handleUserEvent);
+
+    var removeListeners = function () {
+      window.removeEventListener('wheel', handleUserEvent);
+      window.removeEventListener('touchstart', handleUserEvent);
+
+      if (options.cancelOnUserAction) {
+        window.removeEventListener('keydown', handleUserEvent);
+        window.removeEventListener('mousedown', handleUserEvent);
+      } else {
+        window.removeEventListener('scroll', handleUserEvent);
+      }
+    };
 
     var step = function () {
       var timeDiff = Date.now() - startingTime;
@@ -130,14 +146,7 @@
         cancelAnimationFrame(requestID);
 
         // Remove listeners
-        window.removeEventListener('wheel', handleUserEvent);
-        window.removeEventListener('touchstart', handleUserEvent);
-
-        if (options.cancelOnUserAction) {
-          window.removeEventListener('keydown', handleUserEvent);
-        } else {
-          window.removeEventListener('scroll', handleUserEvent);
-        }
+        removeListeners();
 
         // Animation is complete, execute callback if there is any
         if (options.onComplete && typeof options.onComplete === 'function') {
