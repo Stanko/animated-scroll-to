@@ -1,5 +1,8 @@
 # animated-scroll-to
 
+[![npm version](https://img.shields.io/npm/v/animated-scroll-to.svg?style=flat-square)](https://www.npmjs.com/package/animated-scroll-to)
+[![npm downloads](https://img.shields.io/npm/dm/animated-scroll-to.svg?style=flat-square)](https://www.npmjs.com/package/animated-scroll-to)
+
 Animated JavaScript window and element scroll.
 Simple, plain JavaScript scrollTo function.
 
