@@ -16,7 +16,7 @@
       }
     }
 
-    var defaultOptions = {
+    var options = {
       speed: 500,
       minDuration: 250,
       maxDuration: 1500,
@@ -25,11 +25,16 @@
       onComplete: undefined,
     };
 
-    var options = {};
+    var optionsKeys = Object.keys(options);
 
-    Object.keys(defaultOptions).forEach(function(key) {
-      options[key] = userOptions[key] ? userOptions[key] : defaultOptions[key];
-    });
+    // Override default options
+    for (var i = 0; i < optionsKeys.length; i++) {
+      var key = optionsKeys[i];
+
+      if (typeof userOptions[key] !== 'undefined') {
+        options[key] = userOptions[key];
+      }
+    }
 
     options.isWindow = options.element === window;
 
