@@ -17,7 +17,7 @@ export interface AnimateScrollToOptions {
    * if set to "false" user input will be disabled until animated scroll is complete.
    * Defaults to `true`.
    */
-  cancelOnUserAction? boolean;
+  cancelOnUserAction?: boolean;
   /** function that will be executed when the scroll animation is finished */
   onComplete?(): void;
 }
