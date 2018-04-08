@@ -74,6 +74,9 @@ const options = {
   // if set to "false" user input will be disabled until animated scroll is complete
   cancelOnUserAction: true,
 
+  // Set passive event Listeners to be true by default. Stops Chrome from complaining.
+  passive: true
+
   // function that will be executed when the scroll animation is finished
   onComplete: function() {}
 };

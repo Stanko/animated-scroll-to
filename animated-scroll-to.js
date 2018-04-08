@@ -23,6 +23,7 @@
       cancelOnUserAction: true,
       element: window,
       onComplete: undefined,
+      passive: true
     };
 
     var optionsKeys = Object.keys(options);
@@ -98,16 +99,16 @@
         removeListeners();
         cancelAnimationFrame(requestID);
       };
-      window.addEventListener('keydown', handleUserEvent);
-      window.addEventListener('mousedown', handleUserEvent);
+      window.addEventListener('keydown', handleUserEvent, { passive });
+      window.addEventListener('mousedown', handleUserEvent, { passive });
     } else {
       // Set handler to prevent user actions while scroll is active
       handleUserEvent = function(e) { e.preventDefault(); };
-      window.addEventListener('scroll', handleUserEvent);
+      window.addEventListener('scroll', handleUserEvent, { passive });
     }
 
-    window.addEventListener('wheel', handleUserEvent);
-    window.addEventListener('touchstart', handleUserEvent);
+    window.addEventListener('wheel', handleUserEvent, { passive });
+    window.addEventListener('touchstart', handleUserEvent, { passive });
 
     var removeListeners = function () {
       window.removeEventListener('wheel', handleUserEvent);
