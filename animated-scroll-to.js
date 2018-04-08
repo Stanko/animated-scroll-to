@@ -99,16 +99,16 @@
         removeListeners();
         cancelAnimationFrame(requestID);
       };
-      window.addEventListener('keydown', handleUserEvent, { passive });
-      window.addEventListener('mousedown', handleUserEvent, { passive });
+      window.addEventListener('keydown', handleUserEvent, { passive: options.passive });
+      window.addEventListener('mousedown', handleUserEvent, { passive: options.passive });
     } else {
       // Set handler to prevent user actions while scroll is active
       handleUserEvent = function(e) { e.preventDefault(); };
-      window.addEventListener('scroll', handleUserEvent, { passive });
+      window.addEventListener('scroll', handleUserEvent, { passive: options.passive });
     }
 
-    window.addEventListener('wheel', handleUserEvent, { passive });
-    window.addEventListener('touchstart', handleUserEvent, { passive });
+    window.addEventListener('wheel', handleUserEvent, { passive: options.passive });
+    window.addEventListener('touchstart', handleUserEvent, { passive: options.passive });
 
     var removeListeners = function () {
       window.removeEventListener('wheel', handleUserEvent);

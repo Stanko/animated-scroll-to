@@ -19,6 +19,8 @@ export interface AnimateScrollToOptions {
    */
   cancelOnUserAction?: boolean;
   /** function that will be executed when the scroll animation is finished */
+  /** Sets passive event listeners **/ 
+  passive?: boolean;
   onComplete?(): void;
 }
 
