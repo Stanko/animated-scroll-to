@@ -49,21 +49,25 @@
     options.isWindow = options.element === window;
 
     var initialScrollPosition = null;
+    var initialAxisScollPosition = 0;
     var maxScroll = null;
 
     if (options.isWindow) {
-      // get cross browser scroll position
-      initialScrollPosition = options.horizontal
-        ? window.scrollX || document.documentElement.scrollLeft
-        : window.scrollY || document.documentElement.scrollTop;
-      // cross browser document height minus window height
       if (options.horizontal) {
+        // get cross browser scroll positions
+        initialScrollPosition = window.scrollX || document.documentElement.scrollLeft;
+        initialAxisScollPosition = window.scrollY || document.documentElement.scrollTop;
+        // cross browser document height minus window height
         maxScroll = Math.max(
           document.body.scrollWidth, document.documentElement.scrollWidth,
           document.body.offsetWidth, document.documentElement.offsetWidth,
           document.body.clientWidth, document.documentElement.clientWidth
         ) - window.innerWidth;
       } else {
+        // get cross browser scroll positions
+        initialScrollPosition = window.scrollY || document.documentElement.scrollTop;
+        initialAxisScollPosition = window.scrollX || document.documentElement.scrollLeft;
+        // cross browser document width minus window width
         maxScroll = Math.max(
           document.body.scrollHeight, document.documentElement.scrollHeight,
           document.body.offsetHeight, document.documentElement.offsetHeight,
@@ -155,9 +159,9 @@
       var doScroll = function(position) {
         if (options.isWindow) {
           if (options.horizontal) {
-            options.element.scrollTo(position, 0);
+            options.element.scrollTo(position, initialAxisScollPosition);
           } else {
-            options.element.scrollTo(0, position);
+            options.element.scrollTo(initialAxisScollPosition, position);
           }
         } else if (options.horizontal) {
           options.element.scrollLeft = position;
