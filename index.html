@@ -107,8 +107,41 @@
       background: #ffffff;
       padding: 0 20px;
       border-radius: 4px;
-      margin-top: 20px;
+      margin: 20px 0;
       border: 1px solid #ddd;
+    }
+
+    .HorizontalDemo {
+      width: 500px;
+      overflow-x: scroll;
+    }
+
+    .HorizontalDemo--content {
+      width: 1500px;
+    }
+
+    .HorizontalElement {
+      background-color: red;
+      float: left;
+      height: 100px;
+      display: block;
+      font-size: 2rem;
+      color: white;
+    }
+    .HorizontalElement:nth-child(1) {
+      background-color: orange;
+    }
+    .HorizontalElement:nth-child(2) {
+      background-color: yellow;
+    }
+    .HorizontalElement:nth-child(3) {
+      background-color: green;
+    }
+    .HorizontalElement:nth-child(4) {
+      background-color: blue;
+    }
+    .HorizontalElement:nth-child(5) {
+      background-color: purple;
     }
 
     pre {
@@ -255,6 +288,26 @@
           Nulla blandit faucibus ex, id lacinia neque ornare vitae.
           Pellentesque a felis neque.
         </p>
+      </div>
+
+      <b>Horizontal scrolling</b>
+      <p>Use buttons beneath to scroll element</p>
+
+      <button onclick="animateScrollTo(0, { element: document.querySelector('.HorizontalDemo'), horizontal: true })">0</button>
+      <button onclick="animateScrollTo(100, { element: document.querySelector('.HorizontalDemo'), horizontal: true })">100</button>
+      <button onclick="animateScrollTo(200, { element: document.querySelector('.HorizontalDemo'), horizontal: true })">200</button>
+      <button onclick="animateScrollTo(500, { element: document.querySelector('.HorizontalDemo'), horizontal: true })">500</button>
+      <button onclick="animateScrollTo(1000, { element: document.querySelector('.HorizontalDemo'), horizontal: true })">1000</button>
+
+      <div class="HorizontalDemo">
+        <p>Use buttons above to scroll this element</p>
+        <div class="HorizontalDemo--content">
+          <div class="HorizontalElement" style="width: 100px;">0</div>
+          <div class="HorizontalElement" style="width: 100px;">100</div>
+          <div class="HorizontalElement" style="width: 300px;">200</div>
+          <div class="HorizontalElement" style="width: 500px;">500</div>
+          <div class="HorizontalElement" style="width: 500px;">1000</div>
+        </div>
       </div>
     </div>
   </div>
