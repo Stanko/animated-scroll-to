@@ -21,6 +21,8 @@ export interface AnimateScrollToOptions {
   /** function that will be executed when the scroll animation is finished */
   /** Sets passive event listeners **/ 
   passive?: boolean;
+  /** scroll horizontally rather than vertically (which is the default) */
+  horizontal?: boolean;
   onComplete?(): void;
 }
 

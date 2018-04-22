@@ -6,22 +6,13 @@
   function __ANIMATE_SCROLL_TO(desiredOffset) {
     var userOptions = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-    if (desiredOffset instanceof HTMLElement) {
-      if (userOptions.element && userOptions.element instanceof HTMLElement) {
-        desiredOffset = (desiredOffset.getBoundingClientRect().top + userOptions.element.scrollTop)
-          - userOptions.element.getBoundingClientRect().top;
-      } else {
-        var scrollTop = window.scrollY || document.documentElement.scrollTop;
-        desiredOffset = scrollTop + desiredOffset.getBoundingClientRect().top;
-      }
-    }
-
     var options = {
       speed: 500,
       minDuration: 250,
       maxDuration: 1500,
       cancelOnUserAction: true,
       element: window,
+      horizontal: false,
       onComplete: undefined,
       passive: true
     };
@@ -37,6 +28,24 @@
       }
     }
 
+    if (desiredOffset instanceof HTMLElement) {
+      if (userOptions.element && userOptions.element instanceof HTMLElement) {
+        if (options.horizontal) {
+          desiredOffset = (desiredOffset.getBoundingClientRect().left + userOptions.element.scrollLeft)
+            - userOptions.element.getBoundingClientRect().left;
+        } else {
+          desiredOffset = (desiredOffset.getBoundingClientRect().top + userOptions.element.scrollTop)
+            - userOptions.element.getBoundingClientRect().top;
+        }
+      } else if (options.horizontal) {
+        var scrollLeft = window.scrollX || document.documentElement.scrollLeft;
+        desiredOffset = scrollLeft + desiredOffset.getBoundingClientRect().left;
+      } else {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        desiredOffset = scrollTop + desiredOffset.getBoundingClientRect().top;
+      }
+    }
+
     options.isWindow = options.element === window;
 
     var initialScrollPosition = null;
@@ -44,17 +53,32 @@
 
     if (options.isWindow) {
       // get cross browser scroll position
-      initialScrollPosition = window.scrollY || document.documentElement.scrollTop;
+      initialScrollPosition = options.horizontal
+        ? window.scrollX || document.documentElement.scrollLeft
+        : window.scrollY || document.documentElement.scrollTop;
       // cross browser document height minus window height
-      maxScroll = Math.max(
-        document.body.scrollHeight, document.documentElement.scrollHeight,
-        document.body.offsetHeight, document.documentElement.offsetHeight,
-        document.body.clientHeight, document.documentElement.clientHeight
-      ) - window.innerHeight;
+      if (options.horizontal) {
+        maxScroll = Math.max(
+          document.body.scrollWidth, document.documentElement.scrollWidth,
+          document.body.offsetWidth, document.documentElement.offsetWidth,
+          document.body.clientWidth, document.documentElement.clientWidth
+        ) - window.innerWidth;
+      } else {
+        maxScroll = Math.max(
+          document.body.scrollHeight, document.documentElement.scrollHeight,
+          document.body.offsetHeight, document.documentElement.offsetHeight,
+          document.body.clientHeight, document.documentElement.clientHeight
+        ) - window.innerHeight;
+      }
     } else {
       // DOM element
-      initialScrollPosition = options.element.scrollTop;
-      maxScroll = options.element.scrollHeight - options.element.clientHeight;
+      if (options.horizontal) {
+        initialScrollPosition = options.element.scrollLeft;
+        maxScroll = options.element.scrollWidth - options.element.clientWidth;
+      } else {
+        initialScrollPosition = options.element.scrollTop;
+        maxScroll = options.element.scrollHeight - options.element.clientHeight;
+      }
     }
 
     // If the scroll position is greater than maximum available scroll
@@ -128,27 +152,33 @@
       var easing = t * t * t + 1;
       var scrollPosition = Math.round(initialScrollPosition + (diff * easing));
 
+      var doScroll = function(position) {
+        if (options.isWindow) {
+          if (options.horizontal) {
+            options.element.scrollTo(position, 0);
+          } else {
+            options.element.scrollTo(0, position);
+          }
+        } else if (options.horizontal) {
+          options.element.scrollLeft = position;
+        } else {
+          options.element.scrollTop = position;
+        }
+      }
+
       if (timeDiff < duration && scrollPosition !== desiredOffset) {
         // If scroll didn't reach desired offset or time is not elapsed
         // Scroll to a new position
         // And request a new step
-
-        if (options.isWindow) {
-          options.element.scrollTo(0, scrollPosition);
-        } else {
-          options.element.scrollTop = scrollPosition;
-        }
+        doScroll(scrollPosition);
 
         requestID = requestAnimationFrame(step);
       } else {
         // If the time elapsed or we reached the desired offset
         // Set scroll to the desired offset (when rounding made it to be off a pixel or two)
         // Clear animation frame to be sure
-        if (options.isWindow) {
-          options.element.scrollTo(0, desiredOffset);
-        } else {
-          options.element.scrollTop = desiredOffset;
-        }
+        doScroll(desiredOffset);
+
         cancelAnimationFrame(requestID);
 
         // Remove listeners

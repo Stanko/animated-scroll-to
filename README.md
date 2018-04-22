@@ -75,7 +75,10 @@ const options = {
   cancelOnUserAction: true,
 
   // Set passive event Listeners to be true by default. Stops Chrome from complaining.
-  passive: true
+  passive: true,
+
+  // Scroll horizontally rather than vertically (which is the default)
+  horizontal: true,
 
   // function that will be executed when the scroll animation is finished
   onComplete: function() {}
