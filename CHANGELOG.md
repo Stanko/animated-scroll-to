@@ -13,6 +13,8 @@
 
 * Chrome would throw `Unable to preventDefault inside passive event listener invocation.` when `cancelOnUserAction` was set to `false` [#18](https://github.com/Stanko/animated-scroll-to/issues/18)
 
+-----
+
 ### v1.2.0
 
 22.04.2018.

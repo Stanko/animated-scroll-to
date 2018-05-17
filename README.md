@@ -6,6 +6,8 @@
 Animated JavaScript window and element scroll.
 Simple, plain JavaScript scrollTo function.
 
+[Changelog](CHANGELOG.md).
+
 ## Demo
 
 Demo is available on [this page](https://stanko.github.io/animated-scroll-to/).
