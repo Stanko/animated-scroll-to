@@ -29,6 +29,15 @@
       }
     }
 
+    if (!options.cancelOnUserAction && options.passive) {
+      options.passive = false;
+      if (userOptions.passive) {
+        console && console.warn(
+          'animated-scroll-to:\n "passive" was set to "false" to prevent errors, ' +
+          'as using "cancelOnUserAction: false" doesn\'t work with passive events.')
+      }
+    }
+
     if (desiredOffset instanceof HTMLElement) {
       if (userOptions.element && userOptions.element instanceof HTMLElement) {
         if (options.horizontal) {

@@ -77,6 +77,7 @@ const options = {
 
   // should animated scroll be canceled on user scroll/keypress
   // if set to "false" user input will be disabled until animated scroll is complete
+  // (when set to false, "passive" will be also set to "false" to prevent Chrome errors)
   cancelOnUserAction: true,
 
   // Set passive event Listeners to be true by default. Stops Chrome from complaining.
