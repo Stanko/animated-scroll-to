@@ -14,7 +14,8 @@
       element: window,
       horizontal: false,
       onComplete: undefined,
-      passive: true
+      passive: true,
+      offset: 0
     };
 
     var optionsKeys = Object.keys(options);
@@ -45,6 +46,9 @@
         desiredOffset = scrollTop + desiredOffset.getBoundingClientRect().top;
       }
     }
+
+    // Add additonal user offset
+    desiredOffset += options.offset
 
     options.isWindow = options.element === window;
 
