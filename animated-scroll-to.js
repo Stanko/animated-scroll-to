@@ -133,6 +133,7 @@
 
     // Method handler
     var handleUserEvent = null;
+    var userEventOptions = { passive: options.passive };
 
     if (options.cancelOnUserAction) {
       // Set handler to cancel scroll on user action
@@ -140,26 +141,26 @@
         removeListeners();
         cancelAnimationFrame(requestID);
       };
-      window.addEventListener('keydown', handleUserEvent, { passive: options.passive });
-      window.addEventListener('mousedown', handleUserEvent, { passive: options.passive });
+      window.addEventListener('keydown', handleUserEvent, userEventOptions);
+      window.addEventListener('mousedown', handleUserEvent, userEventOptions);
     } else {
       // Set handler to prevent user actions while scroll is active
       handleUserEvent = function(e) { e.preventDefault(); };
-      window.addEventListener('scroll', handleUserEvent, { passive: options.passive });
+      window.addEventListener('scroll', handleUserEvent, userEventOptions);
     }
 
-    window.addEventListener('wheel', handleUserEvent, { passive: options.passive });
-    window.addEventListener('touchstart', handleUserEvent, { passive: options.passive });
+    window.addEventListener('wheel', handleUserEvent, userEventOptions);
+    window.addEventListener('touchstart', handleUserEvent, userEventOptions);
 
     var removeListeners = function () {
-      window.removeEventListener('wheel', handleUserEvent);
-      window.removeEventListener('touchstart', handleUserEvent);
+      window.removeEventListener('wheel', handleUserEvent, userEventOptions);
+      window.removeEventListener('touchstart', handleUserEvent, userEventOptions);
 
       if (options.cancelOnUserAction) {
-        window.removeEventListener('keydown', handleUserEvent);
-        window.removeEventListener('mousedown', handleUserEvent);
+        window.removeEventListener('keydown', handleUserEvent, userEventOptions);
+        window.removeEventListener('mousedown', handleUserEvent, userEventOptions);
       } else {
-        window.removeEventListener('scroll', handleUserEvent);
+        window.removeEventListener('scroll', handleUserEvent, userEventOptions);
       }
     };
 
