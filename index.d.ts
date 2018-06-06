@@ -13,6 +13,12 @@ export interface AnimateScrollToOptions {
   /** DOM element to scroll, defaults to `window`. */
   element?: HTMLElement | Window;
   /**
+   * Additional offset value that gets added to the desiredOffset. This is
+   * useful when passing a DOM object as the desiredOffset and wanting to adjust
+   * for an fixed nav or to add some padding.
+   */
+  offset?: number;
+  /**
    * should animated scroll be canceled on user scroll/keypress
    * if set to "false" user input will be disabled until animated scroll is complete.
    * Defaults to `true`.
