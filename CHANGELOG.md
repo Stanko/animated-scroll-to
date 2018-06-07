@@ -1,5 +1,16 @@
 # Changelog
 
+### v1.2.2
+
+07.06.2018.
+
+**Fixed**
+
+
+* Fix event listeners not being removed in IE11 [#19](https://github.com/Stanko/animated-scroll-to/pull/19)
+* Updated `index.d.ts` to add `offset` [#19](https://github.com/Stanko/animated-scroll-to/pull/19)
+
+-----
 
 ### v1.2.1
 
