@@ -15,7 +15,8 @@
       horizontal: false,
       onComplete: undefined,
       passive: true,
-      offset: 0
+      offset: 0,
+      useKeys: false
     };
 
     var optionsKeys = Object.keys(options);
@@ -141,7 +142,9 @@
         removeListeners();
         cancelAnimationFrame(requestID);
       };
-      window.addEventListener('keydown', handleUserEvent, userEventOptions);
+      if (!options.useKeys) {
+        window.addEventListener('keydown', handleUserEvent, userEventOptions);
+      }
       window.addEventListener('mousedown', handleUserEvent, userEventOptions);
     } else {
       // Set handler to prevent user actions while scroll is active
@@ -157,7 +160,9 @@
       window.removeEventListener('touchstart', handleUserEvent, userEventOptions);
 
       if (options.cancelOnUserAction) {
-        window.removeEventListener('keydown', handleUserEvent, userEventOptions);
+        if (!options.useKeys) {
+          window.addEventListener('keydown', handleUserEvent, userEventOptions);
+        }
         window.removeEventListener('mousedown', handleUserEvent, userEventOptions);
       } else {
         window.removeEventListener('scroll', handleUserEvent, userEventOptions);
