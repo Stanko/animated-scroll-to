@@ -85,8 +85,8 @@ const options = {
   // Set passive event Listeners to be true by default. Stops Chrome from complaining.
   passive: true,
 
-  // Scroll horizontally rather than vertically (which is the default)
-  horizontal: true,
+  // Scroll horizontally rather than vertically
+  horizontal: false,
   
   // use keyboard buttons to trigger scrolling as well
   useKeys: false,
