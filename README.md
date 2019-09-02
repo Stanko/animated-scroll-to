@@ -6,7 +6,10 @@
 Animated JavaScript window and element scroll.
 Simple, plain JavaScript scrollTo function.
 
-[Changelog](CHANGELOG.md).
+
+* Please note that since version 1.3.0 `onComplete` gets called even when scroll animation is canceled by user. To accommodate callback will now has `isCanceledByUserAction` boolean argument.
+
+All changes are tracked in [CHANGELOG](CHANGELOG.md).
 
 ## Demo
 
@@ -89,7 +92,8 @@ const options = {
   horizontal: true,
 
   // function that will be executed when the scroll animation is finished
-  onComplete: function() {}
+  // or canceled by a user action. `isCanceledByUserAction` is a boolean
+  onComplete: function(isCanceledByUserAction) {}
 };
 
 const desiredOffset = 1000;

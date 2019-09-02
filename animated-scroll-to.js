@@ -110,7 +110,7 @@
     if (diff === 0) {
       // Execute callback if there is any
       if (options.onComplete && typeof options.onComplete === 'function') {
-        options.onComplete()
+        options.onComplete(false)
       }
 
       return;
@@ -140,6 +140,11 @@
       handleUserEvent = function() {
         removeListeners();
         cancelAnimationFrame(requestID);
+        
+        // Animation is canceled, execute callback if there is any
+        if (options.onComplete && typeof options.onComplete === 'function') {
+          options.onComplete(true)
+        }
       };
       window.addEventListener('keydown', handleUserEvent, userEventOptions);
       window.addEventListener('mousedown', handleUserEvent, userEventOptions);
@@ -204,7 +209,7 @@
 
         // Animation is complete, execute callback if there is any
         if (options.onComplete && typeof options.onComplete === 'function') {
-          options.onComplete()
+          options.onComplete(false)
         }
       }
     };
