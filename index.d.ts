@@ -24,13 +24,19 @@ export interface AnimateScrollToOptions {
    * Defaults to `true`.
    */
   cancelOnUserAction?: boolean;
-  /** function that will be executed when the scroll animation is finished */
-  /** Sets passive event listeners **/ 
+  /** Sets passive event listeners **/
   passive?: boolean;
   /** scroll horizontally rather than vertically (which is the default) */
   horizontal?: boolean;
-  onComplete?(): void;
+  /** 
+   * function that will be executed when the scroll animation is finished
+   * or canceled by a user action
+   */
+  onComplete?: (isCanceledByUserAction: boolean) => void;
 }
 
-declare function animateScrollTo(desiredOffset: number | HTMLElement, options?: AnimateScrollToOptions): void;
+declare function animateScrollTo(
+  desiredOffset: number | HTMLElement,
+  options?: AnimateScrollToOptions
+): void;
 export default animateScrollTo;

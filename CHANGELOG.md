@@ -1,11 +1,20 @@
 # Changelog
 
+### v1.3.0
+
+02.09.2018.
+
+**Changed**
+
+* `onComplete` callback now has a boolean argument `isCanceledByUserAction`, and it is called even when scroll is canceled [#26](https://github.com/Stanko/animated-scroll-to/issues/26)
+
+-----
+
 ### v1.2.2
 
 07.06.2018.
 
 **Fixed**
-
 
 * Fix event listeners not being removed in IE11 [#19](https://github.com/Stanko/animated-scroll-to/pull/19)
 * Updated `index.d.ts` to add `offset` [#19](https://github.com/Stanko/animated-scroll-to/pull/19)
