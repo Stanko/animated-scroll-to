@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>Animated window scroll to</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #111;
+      font-size: 18px;
+      background-size: 100px 100px;
+      background-image: linear-gradient(to right, #ddd 1px, transparent 1px), linear-gradient(to bottom, #ddd 1px, transparent 1px);
+      width: 5000px;
+      height: 10000px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .element-to-scroll {
+      background: #ffffff;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      color: #222;
+      height: 300px;
+      left: 0;
+      max-width: 300px;
+      overflow-y: auto;
+      position: fixed;
+      top: 0;
+    }
+
+    .element-to-scroll::-webkit-scrollbar {
+      width: 8px;
+      height: 8px; 
+      
+    }
+ 
+    .element-to-scroll::-webkit-scrollbar-track {
+      background: #f3f4f6;
+    }
+    
+    .element-to-scroll::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background: #bbb;
+    }
+
+    .element-to-scroll-content {
+      background-size: 50px 50px;
+      background-image: linear-gradient(to right, #ddd 1px, transparent 1px), linear-gradient(to bottom, #ddd 1px, transparent 1px);
+      height: 3000px;
+      overflow: hidden;
+      width: 3000px;
+    }
+
+    .element-scroll-to,
+    .window-scroll-to {
+      margin-top: 1000px;
+      margin-left: 1000px;
+      height: 100px;
+      width: 100px;
+      border: 1px solid blue;
+    }
+  </style>
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="https://muffinman.io/public/favicon/apple-touch-icon.png?v=v3">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://muffinman.io/public/favicon/favicon-32x32.png?v=v3">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://muffinman.io/public/favicon/favicon-16x16.png?v=v3">
+  <link rel="manifest" href="https://muffinman.io/public/favicon/manifest.json?v=v3">
+  <link rel="mask-icon" href="https://muffinman.io/public/favicon/safari-pinned-tab.svg?v=v3" color="#e04856">
+  <link rel="shortcut icon" href="https://muffinman.io/public/favicon/favicon.ico?v=v3">
+  <meta name="msapplication-config" content="https://muffinman.io/public/favicon/browserconfig.xml?v=v3">
+  <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+  <div class="element-to-scroll">
+    <div class="element-to-scroll-content">
+      <div class="element-scroll-to"></div>
+    </div>
+  </div>
+  <div class="window-scroll-to"></div>
+  <script src="./src/animated-scroll-to.ts"></script>
+</body>
+</html>

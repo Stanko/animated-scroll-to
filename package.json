@@ -1,10 +1,19 @@
 {
   "name": "animated-scroll-to",
-  "version": "1.3.1",
+  "version": "2.0.0-beta.0",
   "description": "Simple, plain JavaScript animated window scroll",
-  "main": "animated-scroll-to.js",
+  "main": "./lib/animated-scroll-to.js",
+  "types": "./lib/animated-scroll-to.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run start:test & npm run cypress",
+    "cypress": "cypress run",
+    "cypress:open": "cypress open",
+    "start": "parcel index.html",
+    "start:test": "parcel test.html",
+    "build": "rm -rf ./lib && tsc --declaration --outDir ./lib --moduleResolution Node --project ./tsconfig.json",
+    "build:docs": "rm -rf ./docs && parcel build index.html --out-dir ./docs",
+    "test-and-build": "npm run test && npm run build && npm run build:docs",
+    "prepublishOnly": "npm run test-and-build"
   },
   "repository": {
     "type": "git",
@@ -20,5 +29,16 @@
     "url": "https://github.com/Stanko/animated-scroll-to/issues"
   },
   "homepage": "https://github.com/Stanko/animated-scroll-to#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "cypress": "^3.4.1",
+    "parcel-bundler": "^1.12.3",
+    "typescript": "^3.6.2"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all",
+    "ie 10",
+    "ie 11"
+  ]
 }

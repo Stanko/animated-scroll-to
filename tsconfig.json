@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "target": "es5",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "sourceMap": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "outDir": "./public/js/app"
+  },
+  // "lib": [
+  //   "ES2015",
+  //   "dom"
+  // ],
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
+}

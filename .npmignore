@@ -5,5 +5,7 @@ npm-debug.log
 .idea/
 .DS_Store
 .cache
+cypress
+docs
 dist
 lib
