@@ -151,21 +151,21 @@
     } else {
       // Set handler to prevent user actions while scroll is active
       handleUserEvent = function(e) { e.preventDefault(); };
-      window.addEventListener('scroll', handleUserEvent, userEventOptions);
+      options.element.addEventListener('scroll', handleUserEvent, userEventOptions);
     }
 
-    window.addEventListener('wheel', handleUserEvent, userEventOptions);
-    window.addEventListener('touchstart', handleUserEvent, userEventOptions);
+    options.element.addEventListener('wheel', handleUserEvent, userEventOptions);
+    options.element.addEventListener('touchstart', handleUserEvent, userEventOptions);
 
     var removeListeners = function () {
-      window.removeEventListener('wheel', handleUserEvent, userEventOptions);
-      window.removeEventListener('touchstart', handleUserEvent, userEventOptions);
+      options.element.removeEventListener('wheel', handleUserEvent, userEventOptions);
+      options.element.removeEventListener('touchstart', handleUserEvent, userEventOptions);
 
       if (options.cancelOnUserAction) {
         window.removeEventListener('keydown', handleUserEvent, userEventOptions);
         window.removeEventListener('mousedown', handleUserEvent, userEventOptions);
       } else {
-        window.removeEventListener('scroll', handleUserEvent, userEventOptions);
+        options.element.removeEventListener('scroll', handleUserEvent, userEventOptions);
       }
     };
 
