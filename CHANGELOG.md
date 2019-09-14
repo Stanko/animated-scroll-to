@@ -1,5 +1,15 @@
 # Changelog
 
+### v1.3.1
+
+14.09.2018.
+
+**Fixed**
+
+* Fixed if element was scrolling and cancelOnUserAction was passed the whole page couldn't scroll [#28](https://github.com/Stanko/animated-scroll-to/issues/28)
+
+-----
+
 ### v1.3.0
 
 02.09.2018.
