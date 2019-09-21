@@ -6,10 +6,10 @@
   "types": "./lib/animated-scroll-to.d.ts",
   "scripts": {
     "test": "npm run start:test & npm run cypress",
-    "cypress": "cypress run",
-    "cypress:open": "cypress open",
     "start": "parcel index.html",
     "start:test": "parcel test.html",
+    "cypress": "cypress run",
+    "cypress:open": "cypress open",
     "build": "rm -rf ./lib && tsc --declaration --outDir ./lib --moduleResolution Node --project ./tsconfig.json",
     "build:docs": "rm -rf ./docs && parcel build index.html --out-dir ./docs",
     "test-and-build": "npm run test && npm run build && npm run build:docs",
