@@ -18,6 +18,7 @@ jobs:
           key: v1-npm-deps--{{ checksum "package.json" }}
           paths:
             - node_modules
+            - .cache
 
 workflows:
   version: 2
