@@ -26,9 +26,5 @@ workflows:
       - tests:
           filters:
             branches:
-              only:
-                - ts
-          #     ignore:
-          #       - master
-          #       - qa
-          #       - dev
+              ignore:
+                - v1
