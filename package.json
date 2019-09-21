@@ -11,7 +11,7 @@
     "start": "parcel index.html",
     "start:test": "parcel test.html",
     "build": "rm -rf ./lib && tsc --declaration --outDir ./lib --moduleResolution Node --project ./tsconfig.json",
-    "build:docs": "rm -rf ./docs && parcel build index.html --out-dir ./docs",
+    "build:docs": "rm -rf ./docs && parcel build index.html --out-dir ./docs --public-url /animated-scroll-to",
     "test-and-build": "npm run test && npm run build && npm run build:docs",
     "prepublishOnly": "npm run test-and-build"
   },
