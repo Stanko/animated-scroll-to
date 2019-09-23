@@ -187,5 +187,3 @@ If you are missing something, feel free to open a pull request.
 ## Version 1
 
 I advise you to use v2, as v1 is deprecated. But it is still available on [v1 branch](https://github.com/Stanko/animated-scroll-to/tree/v1) and on [npm](https://www.npmjs.com/package/animated-scroll-to/v/1.3.1).
-
-
