@@ -1,6 +1,6 @@
 describe("Scrolling the element", function() {
   it("scrolls the element vertically", function() {
-    cy.visit("http://localhost:1234");
+    cy.visit("http://localhost:8888");
 
     cy.window().then(win => {
       cy.get(".element-to-scroll").then(elementToScroll => {
@@ -16,7 +16,7 @@ describe("Scrolling the element", function() {
   });
 
   it("scrolls the element horizontally and vertically", function() {
-    cy.visit("http://localhost:1234");
+    cy.visit("http://localhost:8888");
 
     cy.window().then(win => {
       cy.get(".element-to-scroll").then(elementToScroll => {
@@ -33,7 +33,7 @@ describe("Scrolling the element", function() {
   });
 
   it("scrolls the element horizontally only", function() {
-    cy.visit("http://localhost:1234");
+    cy.visit("http://localhost:8888");
 
     cy.window().then(win => {
       cy.get(".element-to-scroll").then(elementToScroll => {
@@ -52,7 +52,7 @@ describe("Scrolling the element", function() {
   });
 
   it("scrolls the element vertically only", function() {
-    cy.visit("http://localhost:1234");
+    cy.visit("http://localhost:8888");
 
     cy.window().then(win => {
       cy.get(".element-to-scroll").then(elementToScroll => {
@@ -71,7 +71,7 @@ describe("Scrolling the element", function() {
   });
 
   it("scrolls the element to element", function() {
-    cy.visit("http://localhost:1234");
+    cy.visit("http://localhost:8888");
 
     cy.window().then(win => {
       cy.get(".element-to-scroll").then(elementToScroll => {
@@ -91,7 +91,7 @@ describe("Scrolling the element", function() {
   });
 
   it("scrolls the element horizontally and vertically with offset", function() {
-    cy.visit("http://localhost:1234");
+    cy.visit("http://localhost:8888");
 
     cy.window().then(win => {
       cy.get(".element-to-scroll").then(elementToScroll => {

@@ -281,8 +281,6 @@ function animateScrollTo(
       { passive: true } :
       { passive: false };
 
-    // TODO check if we should handle this:
-    // https://github.com/Stanko/animated-scroll-to/pull/29
     const events = [
       'wheel',
       'touchstart',
@@ -293,13 +291,13 @@ function animateScrollTo(
     // Function to remove listeners after animation is finished
     const removeListeners = () => {
       events.forEach(eventName => {
-        window.removeEventListener(eventName, handler);
+        options.elementToScroll.removeEventListener(eventName, handler);
       });
     };
 
     // Add listeners
     events.forEach(eventName => {
-      window.addEventListener(eventName, handler, eventOptions);
+      options.elementToScroll.addEventListener(eventName, handler, eventOptions);
     });
 
     // Animation
