@@ -1,6 +1,6 @@
 describe("Scrolling the window", function() {
   it("scrolls the window vertically", function() {
-    cy.visit("http://localhost:8888");
+    cy.visit("http://localhost:8088");
 
     cy.window().then(win => {
       return win.animateScrollTo(1000).then(() => {
@@ -10,7 +10,7 @@ describe("Scrolling the window", function() {
   });
 
   it("scrolls the window horizontally and vertically", function() {
-    cy.visit("http://localhost:8888");
+    cy.visit("http://localhost:8088");
 
     cy.window().then(win => {
       return win.animateScrollTo([500, 500]).then(() => {
@@ -21,7 +21,7 @@ describe("Scrolling the window", function() {
   });
 
   it("scrolls the window horizontally only", function() {
-    cy.visit("http://localhost:8888");
+    cy.visit("http://localhost:8088");
 
     cy.window().then(win => {
       const currentY = win.scrollY;
@@ -34,7 +34,7 @@ describe("Scrolling the window", function() {
   });
 
   it("scrolls the window vertically only", function() {
-    cy.visit("http://localhost:8888");
+    cy.visit("http://localhost:8088");
 
     cy.window().then(win => {
       const currentX = win.scrollX;
@@ -47,7 +47,7 @@ describe("Scrolling the window", function() {
   });
 
   it("scrolls the window to element", function() {
-    cy.visit("http://localhost:8888");
+    cy.visit("http://localhost:8088");
 
     cy.window().then(win => {
       cy.get(".window-scroll-to").then(elementToScrollTo => {
@@ -61,7 +61,7 @@ describe("Scrolling the window", function() {
   });
 
   it("scrolls the window horizontally and vertically with offset", function() {
-    cy.visit("http://localhost:8888");
+    cy.visit("http://localhost:8088");
 
     cy.window().then(win => {
       return win
@@ -77,7 +77,7 @@ describe("Scrolling the window", function() {
   });
 
   it("animation finishes in correct duration when min and max durations are the same", function() {
-    cy.visit("http://localhost:8888");
+    cy.visit("http://localhost:8088");
 
     cy.window().then(win => {
       const start = Date.now();
@@ -99,7 +99,7 @@ describe("Scrolling the window", function() {
   });
 
   it("animation finishes in correct duration when speed is set", function() {
-    cy.visit("http://localhost:8888");
+    cy.visit("http://localhost:8088");
 
     cy.window().then(win => {
       const start = Date.now();

@@ -1,8 +1,20 @@
 # Changelog
 
+### v2.0.0 and v2.0.1
+
+23.09.2019.
+
+**Changed**
+
+* Full TypeScript rewrite
+* New method signatures
+* Method now returns a promise 
+
+-----
+
 ### v1.3.1
 
-14.09.2018.
+14.09.2019.
 
 **Fixed**
 
@@ -12,7 +24,7 @@
 
 ### v1.3.0
 
-02.09.2018.
+02.09.2019.
 
 **Changed**
 
