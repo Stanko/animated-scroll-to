@@ -11,7 +11,7 @@ All changes are tracked in [CHANGELOG](CHANGELOG.md).
 
 ## Demo
 
-Play with the [live demo.](https://stanko.github.io/animated-scroll-to/).
+Play with the [live demo.](https://stanko.github.io/animated-scroll-to/)
 
 ## Features
 
