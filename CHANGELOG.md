@@ -1,5 +1,16 @@
 # Changelog
 
+### v2.0.2
+
+26.09.2019.
+
+**Changed**
+
+* Switched to commonjs module [#33](https://github.com/Stanko/animated-scroll-to/issues/33)
+
+-----
+
+
 ### v2.0.0 and v2.0.1
 
 23.09.2019.
