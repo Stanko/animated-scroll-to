@@ -130,15 +130,20 @@ const activeAnimations = {
 
 // --------- ANIMATE SCROLL TO
 
-const defaultOptions:IOptions = {
-  cancelOnUserAction: true,
-  easing: t => (--t) * t * t + 1, // easeOutCubic
-  elementToScroll: window,
-  horizontalOffset: 0,
-  maxDuration: 3000,
-  minDuration: 250,
-  speed: 500,
-  verticalOffset: 0,
+function getDefaultOptions():IOptions | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+  return {
+    cancelOnUserAction: true,
+    easing: t => (--t) * t * t + 1, // easeOutCubic
+    elementToScroll: window,
+    horizontalOffset: 0,
+    maxDuration: 3000,
+    minDuration: 250,
+    speed: 500,
+    verticalOffset: 0
+  }
 };
 
 function animateScrollTo(y:number, userOptions?:IUserOptions);
@@ -162,11 +167,11 @@ function animateScrollTo(
   let y:number | null;
   let scrollToElement:Element; 
   let options:IOptions = { 
-    ...defaultOptions, 
+    ...getDefaultOptions(), 
     ...userOptions, 
   }; 
 
-  const isWindow = options.elementToScroll === window;
+  const isWindow = typeof window !== "undefined" && options.elementToScroll === window;
   const isElement = !!(options.elementToScroll as Element).nodeName;
 
   if (!isWindow && !isElement) {
