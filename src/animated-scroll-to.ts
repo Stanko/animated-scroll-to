@@ -127,13 +127,16 @@ const activeAnimations = {
   }
 };
 
+// --------- CHECK IF CODE IS RUNNING IN A BROWSER
+
+const WINDOW_EXISTS = typeof window !== 'undefined';
 
 // --------- ANIMATE SCROLL TO
 
 const defaultOptions:IOptions = {
   cancelOnUserAction: true,
   easing: t => (--t) * t * t + 1, // easeOutCubic
-  elementToScroll: window,
+  elementToScroll: WINDOW_EXISTS ? window : null, // Check for server side rendering
   horizontalOffset: 0,
   maxDuration: 3000,
   minDuration: 250,
@@ -149,9 +152,12 @@ function animateScrollTo(
   userOptions: IUserOptions = {}
 ) {
   // Check for server rendering
-  if (typeof window === 'undefined') {
-    // Silently fail
-    return;
+  if (!WINDOW_EXISTS) {
+    // @ts-ignore
+    // If it still gets called on server, return Promise for API consistency
+    return new Promise((resolve:(hasScrolledToPosition:boolean) => void) => {
+      resolve(false); // Returning false on server
+    });
   } else if (!(window as any).Promise){
     throw(
       'Browser doesn\'t support Promises, and animated-scroll-to depends on it, please provide a polyfill.'
@@ -345,5 +351,7 @@ export default animateScrollTo;
 // Don't forget to include Promise polyfill for IE
 // <script src="https://unpkg.com/es6-promise/dist/es6-promise.auto.min.js"></script>
 // https://github.com/stefanpenner/es6-promise
-// @ts-ignore
-window.animateScrollTo = animateScrollTo;
+if (WINDOW_EXISTS) {
+  (window as any).animateScrollTo = animateScrollTo;
+}
+

@@ -1,5 +1,15 @@
 # Changelog
 
+### v2.0.3
+
+03.10.2019.
+
+**Fixed**
+
+* Fixed library breaking when running on server [#34](https://github.com/Stanko/animated-scroll-to/issues/34)
+
+-----
+
 ### v2.0.2
 
 26.09.2019.
