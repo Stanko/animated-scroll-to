@@ -345,5 +345,7 @@ export default animateScrollTo;
 // Don't forget to include Promise polyfill for IE
 // <script src="https://unpkg.com/es6-promise/dist/es6-promise.auto.min.js"></script>
 // https://github.com/stefanpenner/es6-promise
-// @ts-ignore
-window.animateScrollTo = animateScrollTo;
+if (typeof window !== "undefined") {
+  // @ts-ignore
+  window.animateScrollTo = animateScrollTo;
+}
