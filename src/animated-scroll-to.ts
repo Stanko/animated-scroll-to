@@ -1,26 +1,14 @@
-type TCoords = [number | null, number | null];
+export type TCoords = [number | null, number | null];
 
-interface IUserOptions {
+export interface IUserOptions {
   cancelOnUserAction?: boolean
   easing?: (t:number) => number
   elementToScroll?: Element | Window
   horizontalOffset?: number
   maxDuration?: number
   minDuration?: number
-  passive?: boolean
   speed?: number
   verticalOffset?: number
-}
-
-interface IOptions {
-  cancelOnUserAction: boolean
-  easing: (t:number) => number
-  elementToScroll: Element | Window
-  horizontalOffset: number
-  maxDuration: number
-  minDuration: number
-  speed: number
-  verticalOffset: number
 }
 
 // --------- SCROLL INTERFACES
@@ -133,7 +121,7 @@ const WINDOW_EXISTS = typeof window !== 'undefined';
 
 // --------- ANIMATE SCROLL TO
 
-const defaultOptions:IOptions = {
+const defaultOptions:IUserOptions = {
   cancelOnUserAction: true,
   easing: t => (--t) * t * t + 1, // easeOutCubic
   elementToScroll: WINDOW_EXISTS ? window : null, // Check for server side rendering
@@ -166,11 +154,11 @@ function animateScrollTo(
 
   let x:number | null;
   let y:number | null;
-  let scrollToElement:Element; 
-  let options:IOptions = { 
-    ...defaultOptions, 
-    ...userOptions, 
-  }; 
+  let scrollToElement:Element;
+  let options:IUserOptions = {
+    ...defaultOptions,
+    ...userOptions,
+  };
 
   const isWindow = options.elementToScroll === window;
   const isElement = !!(options.elementToScroll as Element).nodeName;
