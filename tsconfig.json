@@ -9,10 +9,6 @@
     "experimentalDecorators": true,
     "outDir": "./public/js/app"
   },
-  // "lib": [
-  //   "ES2015",
-  //   "dom"
-  // ],
   "include": [
     "src/**/*"
   ],

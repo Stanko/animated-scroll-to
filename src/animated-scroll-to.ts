@@ -1,6 +1,6 @@
 type TCoords = [number | null, number | null];
 
-interface IUserOptions {
+interface IOptions {
   cancelOnUserAction?: boolean
   easing?: (t:number) => number
   elementToScroll?: Element | Window
@@ -10,17 +10,6 @@ interface IUserOptions {
   passive?: boolean
   speed?: number
   verticalOffset?: number
-}
-
-interface IOptions {
-  cancelOnUserAction: boolean
-  easing: (t:number) => number
-  elementToScroll: Element | Window
-  horizontalOffset: number
-  maxDuration: number
-  minDuration: number
-  speed: number
-  verticalOffset: number
 }
 
 // --------- SCROLL INTERFACES
@@ -144,12 +133,12 @@ const defaultOptions:IOptions = {
   verticalOffset: 0,
 };
 
-function animateScrollTo(y:number, userOptions?:IUserOptions);
-function animateScrollTo(coords:TCoords, userOptions?:IUserOptions);
-function animateScrollTo(scrollToElement: Element, userOptions?:IUserOptions);
+function animateScrollTo(y:number, userOptions?:IOptions);
+function animateScrollTo(coords:TCoords, userOptions?:IOptions);
+function animateScrollTo(scrollToElement: Element, userOptions?:IOptions);
 function animateScrollTo(
   numberOrCoordsOrElement: number | TCoords | Element,
-  userOptions: IUserOptions = {}
+  userOptions: IOptions = {}
 ) {
   // Check for server rendering
   if (!WINDOW_EXISTS) {
