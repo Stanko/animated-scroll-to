@@ -1,6 +1,6 @@
-type TCoords = [number | null, number | null];
+export type TCoords = [number | null, number | null];
 
-interface IOptions {
+export interface IOptions {
   cancelOnUserAction?: boolean
   easing?: (t:number) => number
   elementToScroll?: Element | Window

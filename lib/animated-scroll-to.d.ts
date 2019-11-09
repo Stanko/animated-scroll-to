@@ -1,5 +1,5 @@
-declare type TCoords = [number | null, number | null];
-interface IOptions {
+export declare type TCoords = [number | null, number | null];
+export interface IOptions {
     cancelOnUserAction?: boolean;
     easing?: (t: number) => number;
     elementToScroll?: Element | Window;

@@ -1,5 +1,13 @@
 # Changelog
 
+### v2.0.4 and v2.0.5
+
+Fixed
+
+* Fixed TS types [#36](https://github.com/Stanko/animated-scroll-to/issues/36)
+
+-----
+
 ### v2.0.3
 
 03.10.2019.
