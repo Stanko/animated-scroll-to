@@ -14,6 +14,27 @@ export interface IOptions {
 
 // --------- SCROLL INTERFACES
 
+function getElementOffset(el) {
+  let top = 0;
+  let left = 0;
+  let element = el;
+
+  // Loop through the DOM tree
+  // and add it's parent's offset to get page offset
+  do {
+    top += element.offsetTop || 0;
+    left += element.offsetLeft || 0;
+    element = element.offsetParent;
+  } while (element);
+
+  return {
+    top,
+    left,
+  };
+}
+
+// --------- SCROLL INTERFACES
+
 // ScrollDomElement and ScrollWindow have identical interfaces
 
 class ScrollDomElement {
@@ -39,12 +60,12 @@ class ScrollDomElement {
     return this.element.scrollHeight - this.element.clientHeight;
   }
 
-  getHorizontalElementScrollOffset(elementToScrollTo:Element):number {
-    return elementToScrollTo.getBoundingClientRect().left + this.element.scrollLeft - this.element.getBoundingClientRect().left;
+  getHorizontalElementScrollOffset(elementToScrollTo:Element, elementToScroll:Element):number {
+    return getElementOffset(elementToScrollTo).left - getElementOffset(elementToScroll).left;
   }
 
-  getVerticalElementScrollOffset(elementToScrollTo:Element):number {
-    return elementToScrollTo.getBoundingClientRect().top + this.element.scrollTop - this.element.getBoundingClientRect().top;
+  getVerticalElementScrollOffset(elementToScrollTo:Element, elementToScroll:Element):number {
+    return getElementOffset(elementToScrollTo).top - getElementOffset(elementToScroll).top;
   }
 
   scrollTo(x:number, y:number) {
@@ -103,12 +124,14 @@ const activeAnimations = {
     activeAnimations.elements.push(element);
     activeAnimations.cancelMethods.push(cancelAnimation);
   },
-  stop: (element:Element | Window) => {
+  remove: (element:Element | Window, shouldStop:boolean = true) => {
     const index = activeAnimations.elements.indexOf(element);
 
     if (index > -1) {
       // Stop animation
-      activeAnimations.cancelMethods[index]();
+      if (shouldStop) {
+        activeAnimations.cancelMethods[index]();
+      }
       // Remove it
       activeAnimations.elements.splice(index, 1);
       activeAnimations.cancelMethods.splice(index, 1);
@@ -176,8 +199,22 @@ function animateScrollTo(
 
   if (numberOrCoordsOrElement instanceof Element) {
     scrollToElement = numberOrCoordsOrElement;
-    x = elementToScroll.getHorizontalElementScrollOffset(scrollToElement);
-    y = elementToScroll.getVerticalElementScrollOffset(scrollToElement);
+
+    // If "elementToScroll" is not a parent of "scrollToElement"
+    if (
+      isElement && 
+      (
+        !(options.elementToScroll as Element).contains(scrollToElement) ||
+        (options.elementToScroll as Element).isSameNode(scrollToElement)
+      )
+    ) {
+      throw(
+        'options.elementToScroll has to be a parent of scrollToElement'
+      );
+    }
+
+    x = elementToScroll.getHorizontalElementScrollOffset(scrollToElement, (options.elementToScroll as Element));
+    y = elementToScroll.getVerticalElementScrollOffset(scrollToElement, (options.elementToScroll as Element));
   } else if (typeof numberOrCoordsOrElement === 'number') {
     x = elementToScroll.getHorizontalScroll();
     y = numberOrCoordsOrElement;
@@ -246,7 +283,7 @@ function animateScrollTo(
     }
 
     // Cancel existing animation if it is already running on the same element
-    activeAnimations.stop(options.elementToScroll);
+    activeAnimations.remove(options.elementToScroll, true);
 
     // To cancel animation we have to store request animation frame ID 
     let requestID;
@@ -322,6 +359,9 @@ function animateScrollTo(
 
         // Remove listeners
         removeListeners();
+
+        // Remove animation from the active animations coordinator
+        activeAnimations.remove(options.elementToScroll, false);
         
         // Resolve promise with a boolean hasScrolledToPosition set to true
         resolve(true);

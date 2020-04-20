@@ -1,5 +1,17 @@
 # Changelog
 
+### v2.0.6 and v2.0.7
+
+20.04.2020.
+
+Fixed
+
+* Calculating element offset inside of element was sometimes a pixel off.
+* Active animations weren't cleared on animation end
+* Now error is thrown in "elementToScroll" is not a parent of "scrollToElement"
+
+-----
+
 ### v2.0.4 and v2.0.5
 
 09.11.2019.

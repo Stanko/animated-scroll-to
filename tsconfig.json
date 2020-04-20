@@ -9,6 +9,10 @@
     "experimentalDecorators": true,
     "outDir": "./public/js/app"
   },
+  "types": [
+    "./",
+    "node"
+  ],
   "include": [
     "src/**/*"
   ],

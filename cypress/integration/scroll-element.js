@@ -75,7 +75,7 @@ describe("Scrolling the element", function() {
 
     cy.window().then(win => {
       cy.get(".element-to-scroll").then(elementToScroll => {
-        cy.get(".window-scroll-to").then(elementToScrollTo => {
+        cy.get(".element-scroll-to").then(elementToScrollTo => {
           return win
             .animateScrollTo(elementToScrollTo[0], {
               elementToScroll: elementToScroll[0]
