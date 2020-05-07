@@ -309,7 +309,7 @@ function animateScrollTo(
       preventDefaultHandler;
 
     // If animation is not cancelable by the user, we can't use passive events
-    const eventOptions = options.cancelOnUserAction ?
+    const eventOptions: any = options.cancelOnUserAction ?
       { passive: true } :
       { passive: false };
 
@@ -323,7 +323,7 @@ function animateScrollTo(
     // Function to remove listeners after animation is finished
     const removeListeners = () => {
       events.forEach(eventName => {
-        options.elementToScroll.removeEventListener(eventName, handler);
+        options.elementToScroll.removeEventListener(eventName, handler, eventOptions);
       });
     };
 
