@@ -1,5 +1,15 @@
 # Changelog
 
+### v2.0.8
+
+07.05.2020.
+
+Fixed
+
+* Event options were missing in `removeEventListener` [#44](https://github.com/Stanko/animated-scroll-to/pull/44)
+
+-----
+
 ### v2.0.6 and v2.0.7
 
 20.04.2020.
