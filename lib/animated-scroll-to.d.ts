@@ -10,7 +10,7 @@ export interface IOptions {
     speed?: number;
     verticalOffset?: number;
 }
-declare function animateScrollTo(y: number, userOptions?: IOptions): any;
-declare function animateScrollTo(coords: TCoords, userOptions?: IOptions): any;
-declare function animateScrollTo(scrollToElement: Element, userOptions?: IOptions): any;
+declare function animateScrollTo(y: number, userOptions?: IOptions): Promise<boolean>;
+declare function animateScrollTo(coords: TCoords, userOptions?: IOptions): Promise<boolean>;
+declare function animateScrollTo(scrollToElement: Element, userOptions?: IOptions): Promise<boolean>;
 export default animateScrollTo;

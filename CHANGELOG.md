@@ -1,5 +1,16 @@
 # Changelog
 
+### v2.0.9
+
+25.06.2020.
+
+Fixed
+
+* Added `Promise<boolean>` as a return type in the types definition file.
+
+-----
+
+
 ### v2.0.8
 
 07.05.2020.

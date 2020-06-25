@@ -156,9 +156,9 @@ const defaultOptions:IOptions = {
   verticalOffset: 0,
 };
 
-function animateScrollTo(y:number, userOptions?:IOptions);
-function animateScrollTo(coords:TCoords, userOptions?:IOptions);
-function animateScrollTo(scrollToElement: Element, userOptions?:IOptions);
+function animateScrollTo(y:number, userOptions?:IOptions): Promise<boolean>;
+function animateScrollTo(coords:TCoords, userOptions?:IOptions): Promise<boolean>;
+function animateScrollTo(scrollToElement: Element, userOptions?:IOptions): Promise<boolean>;
 function animateScrollTo(
   numberOrCoordsOrElement: number | TCoords | Element,
   userOptions: IOptions = {}
