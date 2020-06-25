@@ -156,13 +156,13 @@ const defaultOptions:IOptions = {
   verticalOffset: 0,
 };
 
-function animateScrollTo(y:number, userOptions?:IOptions): Promise<boolean>;
-function animateScrollTo(coords:TCoords, userOptions?:IOptions): Promise<boolean>;
-function animateScrollTo(scrollToElement: Element, userOptions?:IOptions): Promise<boolean>;
-function animateScrollTo(
+async function animateScrollTo(y:number, userOptions?:IOptions): Promise<boolean>;
+async function animateScrollTo(coords:TCoords, userOptions?:IOptions): Promise<boolean>;
+async function animateScrollTo(scrollToElement: Element, userOptions?:IOptions): Promise<boolean>;
+async function animateScrollTo(
   numberOrCoordsOrElement: number | TCoords | Element,
   userOptions: IOptions = {}
-) {
+): Promise<boolean> {
   // Check for server rendering
   if (!WINDOW_EXISTS) {
     // @ts-ignore
