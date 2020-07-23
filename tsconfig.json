@@ -7,7 +7,11 @@
     "sourceMap": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "outDir": "./public/js/app"
+    "outDir": "./public/js/app",
+    "lib": [
+      "ES2015",
+      "DOM"
+    ]
   },
   "types": [
     "./",
