@@ -1,15 +1,17 @@
+type Offset = number | (() => number);
+
 export type TCoords = [number | null, number | null];
 
 export interface IOptions {
   cancelOnUserAction?: boolean
   easing?: (t:number) => number
   elementToScroll?: Element | Window
-  horizontalOffset?: number
+  horizontalOffset?: Offset
   maxDuration?: number
   minDuration?: number
   passive?: boolean
   speed?: number
-  verticalOffset?: number
+  verticalOffset?: Offset
 }
 
 // --------- SCROLL INTERFACES
@@ -233,8 +235,8 @@ async function animateScrollTo(
   }
 
   // Add offsets
-  x += options.horizontalOffset;
-  y += options.verticalOffset;
+  x += typeof options.horizontalOffset === 'number' ? options.horizontalOffset : options.horizontalOffset();
+  y += typeof options.verticalOffset === 'number' ? options.verticalOffset : options.verticalOffset();
 
 
   // Horizontal scroll distance
