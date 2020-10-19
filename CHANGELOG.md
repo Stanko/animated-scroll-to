@@ -1,10 +1,22 @@
 # Changelog
 
+### v2.0.11
+
+19.10.2020.
+
+**Fixed**
+
+* Improved types, labeled tuple coordinates for TCoords [#49](https://github.com/Stanko/animated-scroll-to/pull/49).
+* Fixed build on windows [#49](https://github.com/Stanko/animated-scroll-to/pull/49).
+
+-----
+
+
 ### v2.0.9, 2.0.10
 
 25.06.2020.
 
-Fixed
+**Fixed**
 
 * Added `Promise<boolean>` as a return type in the types definition file.
 
@@ -15,7 +27,7 @@ Fixed
 
 07.05.2020.
 
-Fixed
+**Fixed**
 
 * Event options were missing in `removeEventListener` [#44](https://github.com/Stanko/animated-scroll-to/pull/44)
 
@@ -25,7 +37,7 @@ Fixed
 
 20.04.2020.
 
-Fixed
+**Fixed**
 
 * Calculating element offset inside of element was sometimes a pixel off.
 * Active animations weren't cleared on animation end
@@ -37,7 +49,7 @@ Fixed
 
 09.11.2019.
 
-Fixed
+**Fixed**
 
 * Fixed TS types [#36](https://github.com/Stanko/animated-scroll-to/issues/36)
 
