@@ -9,8 +9,8 @@
     "cypress:open": "cypress open",
     "start": "parcel index.html",
     "start:test": "parcel test.html --port 8088",
-    "build": "rm -rf ./lib && tsc --declaration --outDir ./lib --moduleResolution Node --project ./tsconfig.json",
-    "build:docs": "rm -rf ./docs && parcel build index.html --out-dir ./docs --public-url /animated-scroll-to",
+    "build": "del-cli ./lib && tsc --declaration --outDir ./lib --moduleResolution Node --project ./tsconfig.json",
+    "build:docs": "del-cli ./docs && parcel build index.html --out-dir ./docs --public-url /animated-scroll-to",
     "test": "concurrently -k \"npm run start:test\" \"npm run cypress\" -s \"first\" -n \"parcel,cypress\" -c \"blue,yellow\"",
     "test-and-build": "npm run test && npm run build && npm run build:docs",
     "prepublishOnly": "npm run test-and-build"
@@ -32,8 +32,9 @@
   "devDependencies": {
     "concurrently": "^5.1.0",
     "cypress": "^4.4.0",
+    "del-cli": "^3.0.1",
     "parcel-bundler": "^1.12.4",
-    "typescript": "^3.8.3"
+    "typescript": "^4.0.3"
   },
   "browserslist": [
     ">0.2%",
