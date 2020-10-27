@@ -1,5 +1,16 @@
 # Changelog
 
+### v2.0.12
+
+27.10.2020.
+
+**Fixed**
+
+* Reverted labeled tuple coordinates for TCoords [#49](https://github.com/Stanko/animated-scroll-to/pull/49) as it breaks on older TS version [#50](https://github.com/Stanko/animated-scroll-to/issues/50).
+
+-----
+
+
 ### v2.0.11
 
 19.10.2020.

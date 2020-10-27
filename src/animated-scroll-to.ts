@@ -1,4 +1,4 @@
-export type TCoords = [x: number | null | undefined, y: number | null | undefined];
+export type TCoords = [number | null | undefined, number | null | undefined];
 
 export interface IOptions {
   cancelOnUserAction?: boolean

@@ -1,4 +1,4 @@
-export declare type TCoords = [x: number | null | undefined, y: number | null | undefined];
+export declare type TCoords = [number | null | undefined, number | null | undefined];
 export interface IOptions {
     cancelOnUserAction?: boolean;
     easing?: (t: number) => number;
