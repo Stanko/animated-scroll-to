@@ -163,10 +163,6 @@ const EasingFunctions = {
 }
 ```
 
-### Usage in the browser directly
-
-It is not recommended but you can use `animateScrollTo` directly in the browser, by including `lib/animated-scroll-to.js` in your page. Please note this file is not minified.
-
 ## Why?
 
 I wasn't able to find standalone, simple and working solution.

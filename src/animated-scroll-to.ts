@@ -374,13 +374,3 @@ async function animateScrollTo(
 }
 
 export default animateScrollTo;
-
-// Support for direct usage in browsers
-// This is mostly to keep it similar to v1
-// Don't forget to include Promise polyfill for IE
-// <script src="https://unpkg.com/es6-promise/dist/es6-promise.auto.min.js"></script>
-// https://github.com/stefanpenner/es6-promise
-if (WINDOW_EXISTS) {
-  (window as any).animateScrollTo = animateScrollTo;
-}
-

@@ -1,5 +1,15 @@
 # Changelog
 
+### v2.1.0
+
+08.03.2020.
+
+**Removed**
+
+* Removed support for using the script in browsers directly. It was broken, so probably was not using it anyway. Use version 1 if you really need it.
+
+-----
+
 ### v2.0.12
 
 27.10.2020.
