@@ -131,7 +131,6 @@ describe('Scrolling the window', function () {
     cy.visit('http://localhost:8088');
 
     cy.document().then((doc) => {
-      console.log(doc.documentElement)
       doc.documentElement.style.scrollBehavior = 'smooth';
 
       cy.window().then((win) => {
