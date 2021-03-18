@@ -1,18 +1,22 @@
-describe("Scrolling the window", function() {
-  it("scrolls the window vertically", function() {
-    cy.visit("http://localhost:8088");
+describe('Scrolling the window', function () {
+  Cypress.on('window:before:load', (win) => {
+    cy.spy(win.console, 'warn');
+  });
 
-    cy.window().then(win => {
+  it('scrolls the window vertically', function () {
+    cy.visit('http://localhost:8088');
+
+    cy.window().then((win) => {
       return win.animateScrollTo(1000).then(() => {
         cy.expect(win.scrollY).to.equal(1000);
       });
     }, 1000);
   });
 
-  it("scrolls the window horizontally and vertically", function() {
-    cy.visit("http://localhost:8088");
+  it('scrolls the window horizontally and vertically', function () {
+    cy.visit('http://localhost:8088');
 
-    cy.window().then(win => {
+    cy.window().then((win) => {
       return win.animateScrollTo([500, 500]).then(() => {
         cy.expect(win.scrollY).to.equal(500);
         cy.expect(win.scrollX).to.equal(500);
@@ -20,10 +24,10 @@ describe("Scrolling the window", function() {
     }, 1000);
   });
 
-  it("scrolls the window horizontally only", function() {
-    cy.visit("http://localhost:8088");
+  it('scrolls the window horizontally only', function () {
+    cy.visit('http://localhost:8088');
 
-    cy.window().then(win => {
+    cy.window().then((win) => {
       const currentY = win.scrollY;
 
       return win.animateScrollTo([500, null]).then(() => {
@@ -33,10 +37,10 @@ describe("Scrolling the window", function() {
     }, 1000);
   });
 
-  it("scrolls the window vertically only", function() {
-    cy.visit("http://localhost:8088");
+  it('scrolls the window vertically only', function () {
+    cy.visit('http://localhost:8088');
 
-    cy.window().then(win => {
+    cy.window().then((win) => {
       const currentX = win.scrollX;
 
       return win.animateScrollTo([null, 1000]).then(() => {
@@ -46,11 +50,11 @@ describe("Scrolling the window", function() {
     }, 1000);
   });
 
-  it("scrolls the window to element", function() {
-    cy.visit("http://localhost:8088");
+  it('scrolls the window to element', function () {
+    cy.visit('http://localhost:8088');
 
-    cy.window().then(win => {
-      cy.get(".window-scroll-to").then(elementToScrollTo => {
+    cy.window().then((win) => {
+      cy.get('.window-scroll-to').then((elementToScrollTo) => {
         return win.animateScrollTo(elementToScrollTo[0]).then(() => {
           // Margins are hard coded in CSS
           cy.expect(win.scrollX).to.equal(1000);
@@ -60,14 +64,14 @@ describe("Scrolling the window", function() {
     }, 1000);
   });
 
-  it("scrolls the window horizontally and vertically with offset", function() {
-    cy.visit("http://localhost:8088");
+  it('scrolls the window horizontally and vertically with offset', function () {
+    cy.visit('http://localhost:8088');
 
-    cy.window().then(win => {
+    cy.window().then((win) => {
       return win
         .animateScrollTo([500, 500], {
           verticalOffset: 100,
-          horizontalOffset: 100
+          horizontalOffset: 100,
         })
         .then(() => {
           cy.expect(win.scrollY).to.equal(600);
@@ -76,10 +80,10 @@ describe("Scrolling the window", function() {
     }, 1000);
   });
 
-  it("animation finishes in correct duration when min and max durations are the same", function() {
-    cy.visit("http://localhost:8088");
+  it('animation finishes in correct duration when min and max durations are the same', function () {
+    cy.visit('http://localhost:8088');
 
-    cy.window().then(win => {
+    cy.window().then((win) => {
       const start = Date.now();
       const THRESHOLD = 1000;
       const DURATION = 500;
@@ -89,7 +93,7 @@ describe("Scrolling the window", function() {
           minDuration: DURATION,
           maxDuration: DURATION,
           // Using linear easing to be sure timings are correct
-          easing: t => t,
+          easing: (t) => t,
         })
         .then(() => {
           const timePassed = Date.now() - start;
@@ -98,10 +102,10 @@ describe("Scrolling the window", function() {
     }, 1000);
   });
 
-  it("animation finishes in correct duration when speed is set", function() {
-    cy.visit("http://localhost:8088");
+  it('animation finishes in correct duration when speed is set', function () {
+    cy.visit('http://localhost:8088');
 
-    cy.window().then(win => {
+    cy.window().then((win) => {
       const start = Date.now();
       const THRESHOLD = 1000;
       const DURATION = 1000; // 1000px at 1000px per second = 1000ms
@@ -114,12 +118,31 @@ describe("Scrolling the window", function() {
           maxDuration: 99999,
           speed: 1000,
           // Using linear easing to be sure timings are correct
-          easing: t => t,
+          easing: (t) => t,
         })
         .then(() => {
           const timePassed = Date.now() - start;
           cy.expect(Math.abs(timePassed - DURATION)).to.be.lessThan(THRESHOLD);
         });
+    }, 1000);
+  });
+
+  it('checks if console.warn is called when scroll-behavior: smooth is set', function () {
+    cy.visit('http://localhost:8088');
+
+    cy.document().then((doc) => {
+      console.log(doc.documentElement)
+      doc.documentElement.style.scrollBehavior = 'smooth';
+
+      cy.window().then((win) => {
+        cy.get('.element-to-scroll').then((elementToScroll) => {
+          return win
+            .animateScrollTo(1000)
+            .then(() => {
+              cy.expect(win.console.warn).to.have.callCount(1);
+            });
+        }, 1000);
+      }, 1000);
     }, 1000);
   });
 });

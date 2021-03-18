@@ -1,5 +1,15 @@
 # Changelog
 
+### v2.2.0
+
+18.03.2020.
+
+**Fixed**
+
+* Added a warning if the scrolling element has `scroll-behavior: smooth` [#55](https://github.com/Stanko/animated-scroll-to/pull/55)
+
+-----
+
 ### v2.1.0
 
 08.03.2020.

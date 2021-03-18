@@ -2,7 +2,7 @@ export type TCoords = [number | null | undefined, number | null | undefined];
 
 export interface IOptions {
   cancelOnUserAction?: boolean
-  easing?: (t:number) => number
+  easing?: (t: number) => number
   elementToScroll?: Element | Window
   horizontalOffset?: number
   maxDuration?: number
@@ -12,7 +12,7 @@ export interface IOptions {
   verticalOffset?: number
 }
 
-// --------- SCROLL INTERFACES
+// --------- HELPERS
 
 function getElementOffset(el) {
   let top = 0;
@@ -38,52 +38,52 @@ function getElementOffset(el) {
 // ScrollDomElement and ScrollWindow have identical interfaces
 
 class ScrollDomElement {
-  element:Element
+  element: Element
 
-  constructor(element:Element) {
+  constructor(element: Element) {
     this.element = element;
   }
 
-  getHorizontalScroll():number {
+  getHorizontalScroll(): number {
     return this.element.scrollLeft;
   }
 
-  getVerticalScroll():number {
+  getVerticalScroll(): number {
     return this.element.scrollTop;
   }
 
-  getMaxHorizontalScroll():number {
+  getMaxHorizontalScroll(): number {
     return this.element.scrollWidth - this.element.clientWidth;
   }
 
-  getMaxVerticalScroll():number {
+  getMaxVerticalScroll(): number {
     return this.element.scrollHeight - this.element.clientHeight;
   }
 
-  getHorizontalElementScrollOffset(elementToScrollTo:Element, elementToScroll:Element):number {
+  getHorizontalElementScrollOffset(elementToScrollTo: Element, elementToScroll: Element): number {
     return getElementOffset(elementToScrollTo).left - getElementOffset(elementToScroll).left;
   }
 
-  getVerticalElementScrollOffset(elementToScrollTo:Element, elementToScroll:Element):number {
+  getVerticalElementScrollOffset(elementToScrollTo: Element, elementToScroll: Element): number {
     return getElementOffset(elementToScrollTo).top - getElementOffset(elementToScroll).top;
   }
 
-  scrollTo(x:number, y:number) {
+  scrollTo(x: number, y: number) {
     this.element.scrollLeft = x;
     this.element.scrollTop = y;
   }
 }
 
 class ScrollWindow {
-  getHorizontalScroll():number {
+  getHorizontalScroll(): number {
     return window.scrollX || document.documentElement.scrollLeft;
   }
 
-  getVerticalScroll():number {
+  getVerticalScroll(): number {
     return window.scrollY || document.documentElement.scrollTop;
   }
 
-  getMaxHorizontalScroll():number {
+  getMaxHorizontalScroll(): number {
     return Math.max(
       document.body.scrollWidth, document.documentElement.scrollWidth,
       document.body.offsetWidth, document.documentElement.offsetWidth,
@@ -91,7 +91,7 @@ class ScrollWindow {
     ) - window.innerWidth;
   }
 
-  getMaxVerticalScroll():number {
+  getMaxVerticalScroll(): number {
     return Math.max(
       document.body.scrollHeight, document.documentElement.scrollHeight,
       document.body.offsetHeight, document.documentElement.offsetHeight,
@@ -99,17 +99,17 @@ class ScrollWindow {
     ) - window.innerHeight;
   }
 
-  getHorizontalElementScrollOffset(elementToScrollTo:Element):number {
+  getHorizontalElementScrollOffset(elementToScrollTo: Element): number {
     const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
     return scrollLeft + elementToScrollTo.getBoundingClientRect().left;
   }
 
-  getVerticalElementScrollOffset(elementToScrollTo:Element):number {
+  getVerticalElementScrollOffset(elementToScrollTo: Element): number {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     return scrollTop + elementToScrollTo.getBoundingClientRect().top;
   }
 
-  scrollTo(x:number, y:number) {
+  scrollTo(x: number, y: number) {
     window.scrollTo(x, y)
   }
 }
@@ -120,11 +120,11 @@ const activeAnimations = {
   elements: [],
   cancelMethods: [],
 
-  add: (element:Element | Window, cancelAnimation:() => void) => {
+  add: (element: Element | Window, cancelAnimation: () => void) => {
     activeAnimations.elements.push(element);
     activeAnimations.cancelMethods.push(cancelAnimation);
   },
-  remove: (element:Element | Window, shouldStop:boolean = true) => {
+  remove: (element: Element | Window, shouldStop: boolean = true) => {
     const index = activeAnimations.elements.indexOf(element);
 
     if (index > -1) {
@@ -145,7 +145,7 @@ const WINDOW_EXISTS = typeof window !== 'undefined';
 
 // --------- ANIMATE SCROLL TO
 
-const defaultOptions:IOptions = {
+const defaultOptions: IOptions = {
   cancelOnUserAction: true,
   easing: t => (--t) * t * t + 1, // easeOutCubic
   elementToScroll: WINDOW_EXISTS ? window : null, // Check for server side rendering
@@ -156,9 +156,9 @@ const defaultOptions:IOptions = {
   verticalOffset: 0,
 };
 
-async function animateScrollTo(y:number, userOptions?:IOptions): Promise<boolean>;
-async function animateScrollTo(coords:TCoords, userOptions?:IOptions): Promise<boolean>;
-async function animateScrollTo(scrollToElement: Element, userOptions?:IOptions): Promise<boolean>;
+async function animateScrollTo(y: number, userOptions?: IOptions): Promise<boolean>;
+async function animateScrollTo(coords: TCoords, userOptions?: IOptions): Promise<boolean>;
+async function animateScrollTo(scrollToElement: Element, userOptions?: IOptions): Promise<boolean>;
 async function animateScrollTo(
   numberOrCoordsOrElement: number | TCoords | Element,
   userOptions: IOptions = {}
@@ -167,34 +167,44 @@ async function animateScrollTo(
   if (!WINDOW_EXISTS) {
     // @ts-ignore
     // If it still gets called on server, return Promise for API consistency
-    return new Promise((resolve:(hasScrolledToPosition:boolean) => void) => {
+    return new Promise((resolve: (hasScrolledToPosition: boolean) => void) => {
       resolve(false); // Returning false on server
     });
-  } else if (!(window as any).Promise){
-    throw(
+  } else if (!(window as any).Promise) {
+    throw (
       'Browser doesn\'t support Promises, and animated-scroll-to depends on it, please provide a polyfill.'
     );
   }
 
-  let x:number | null;
-  let y:number | null;
-  let scrollToElement:Element; 
-  let options:IOptions = { 
-    ...defaultOptions, 
-    ...userOptions, 
-  }; 
+  let x: number | null;
+  let y: number | null;
+  let scrollToElement: Element;
+  let options: IOptions = {
+    ...defaultOptions,
+    ...userOptions,
+  };
 
   const isWindow = options.elementToScroll === window;
   const isElement = !!(options.elementToScroll as Element).nodeName;
 
   if (!isWindow && !isElement) {
-    throw(
+    throw (
       'Element to scroll needs to be either window or DOM element.'
     );
   }
 
-  const elementToScroll = isWindow ? 
-    new ScrollWindow() : 
+  // Check for "scroll-behavior: smooth" as it can break the animation
+  // https://github.com/Stanko/animated-scroll-to/issues/55
+  const scrollBehaviorElement: Element = isWindow ? document.documentElement : (options.elementToScroll as Element);
+  const scrollBehavior = getComputedStyle(scrollBehaviorElement).getPropertyValue('scroll-behavior');
+
+  if (scrollBehavior === 'smooth') {
+    console.warn(`${scrollBehaviorElement.tagName} has "scroll-behavior: smooth" which can mess up with animated-scroll-to's animations`);
+  }
+
+  // Select the correct scrolling interface
+  const elementToScroll = isWindow ?
+    new ScrollWindow() :
     new ScrollDomElement(options.elementToScroll as Element);
 
   if (numberOrCoordsOrElement instanceof Element) {
@@ -202,13 +212,13 @@ async function animateScrollTo(
 
     // If "elementToScroll" is not a parent of "scrollToElement"
     if (
-      isElement && 
+      isElement &&
       (
         !(options.elementToScroll as Element).contains(scrollToElement) ||
         (options.elementToScroll as Element).isSameNode(scrollToElement)
       )
     ) {
-      throw(
+      throw (
         'options.elementToScroll has to be a parent of scrollToElement'
       );
     }
@@ -223,11 +233,11 @@ async function animateScrollTo(
     y = numberOrCoordsOrElement[1] === null ? elementToScroll.getVerticalScroll() : numberOrCoordsOrElement[1];
   } else {
     // ERROR
-    throw(
-      'Wrong function signature. Check documentation.\n' + 
+    throw (
+      'Wrong function signature. Check documentation.\n' +
       'Available method signatures are:\n' +
-      '  animateScrollTo(y:number, options)\n' + 
-      '  animateScrollTo([x:number | null, y:number | null], options)\n' + 
+      '  animateScrollTo(y:number, options)\n' +
+      '  animateScrollTo([x:number | null, y:number | null], options)\n' +
       '  animateScrollTo(scrollToElement:Element, options)'
     );
   }
@@ -275,7 +285,7 @@ async function animateScrollTo(
   }
 
   // @ts-ignore
-  return new Promise((resolve:(hasScrolledToPosition:boolean) => void, reject) => {
+  return new Promise((resolve: (hasScrolledToPosition: boolean) => void, reject) => {
     // Scroll is already in place, nothing to do
     if (horizontalDistanceToScroll === 0 && verticalDistanceToScroll === 0) {
       // Resolve promise with a boolean hasScrolledToPosition set to true
@@ -303,9 +313,9 @@ async function animateScrollTo(
 
     // Prevent user actions handler
     const preventDefaultHandler = e => e.preventDefault();
-    
-    const handler = options.cancelOnUserAction ? 
-      cancelAnimation : 
+
+    const handler = options.cancelOnUserAction ?
+      cancelAnimation :
       preventDefaultHandler;
 
     // If animation is not cancelable by the user, we can't use passive events
@@ -338,10 +348,10 @@ async function animateScrollTo(
     const step = () => {
       var timeDiff = Date.now() - startingTime;
       var t = timeDiff / duration;
-      
+
       const horizontalScrollPosition = Math.round(initialHorizontalScroll + (horizontalDistanceToScroll * options.easing(t)));
       const verticalScrollPosition = Math.round(initialVerticalScroll + (verticalDistanceToScroll * options.easing(t)));
-      
+
       if (timeDiff < duration && (horizontalScrollPosition !== x || verticalScrollPosition !== y)) {
         // If scroll didn't reach desired position or time is not elapsed
         // Scroll to a new position
@@ -362,7 +372,7 @@ async function animateScrollTo(
 
         // Remove animation from the active animations coordinator
         activeAnimations.remove(options.elementToScroll, false);
-        
+
         // Resolve promise with a boolean hasScrolledToPosition set to true
         resolve(true);
       }
