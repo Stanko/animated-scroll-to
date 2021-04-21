@@ -5,4 +5,5 @@ npm-debug.log
 .idea/
 .DS_Store
 .cache
+.parcel-cache
 dist
