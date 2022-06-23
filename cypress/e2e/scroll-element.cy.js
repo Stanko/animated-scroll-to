@@ -4,7 +4,7 @@ describe('Scrolling the element', function () {
   });
 
   it('scrolls the element vertically', function () {
-    cy.visit('http://localhost:8088');
+    cy.visit('http://localhost:8000/test.html');
 
     cy.window().then((win) => {
       cy.get('.element-to-scroll').then((elementToScroll) => {
@@ -20,7 +20,7 @@ describe('Scrolling the element', function () {
   });
 
   it('scrolls the element horizontally and vertically', function () {
-    cy.visit('http://localhost:8088');
+    cy.visit('http://localhost:8000/test.html');
 
     cy.window().then((win) => {
       cy.get('.element-to-scroll').then((elementToScroll) => {
@@ -37,7 +37,7 @@ describe('Scrolling the element', function () {
   });
 
   it('scrolls the element horizontally only', function () {
-    cy.visit('http://localhost:8088');
+    cy.visit('http://localhost:8000/test.html');
 
     cy.window().then((win) => {
       cy.get('.element-to-scroll').then((elementToScroll) => {
@@ -56,7 +56,7 @@ describe('Scrolling the element', function () {
   });
 
   it('scrolls the element vertically only', function () {
-    cy.visit('http://localhost:8088');
+    cy.visit('http://localhost:8000/test.html');
 
     cy.window().then((win) => {
       cy.get('.element-to-scroll').then((elementToScroll) => {
@@ -75,7 +75,7 @@ describe('Scrolling the element', function () {
   });
 
   it('scrolls the element to element', function () {
-    cy.visit('http://localhost:8088');
+    cy.visit('http://localhost:8000/test.html');
 
     cy.window().then((win) => {
       cy.get('.element-to-scroll').then((elementToScroll) => {
@@ -95,7 +95,7 @@ describe('Scrolling the element', function () {
   });
 
   it('scrolls the element horizontally and vertically with offset', function () {
-    cy.visit('http://localhost:8088');
+    cy.visit('http://localhost:8000/test.html');
 
     cy.window().then((win) => {
       cy.get('.element-to-scroll').then((elementToScroll) => {
@@ -114,7 +114,7 @@ describe('Scrolling the element', function () {
   });
 
   it('checks if console.warn is called when scroll-behavior: smooth is set', function () {
-    cy.visit('http://localhost:8088');
+    cy.visit('http://localhost:8000/test.html');
 
     cy.window().then((win) => {
       cy.get('.element-to-scroll').then((elementToScroll) => {

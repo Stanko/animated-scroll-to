@@ -1,25 +1,8 @@
 {
+  "extends": "./tsconfig-base.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
-    "moduleResolution": "node",
-    "noImplicitAny": false,
-    "sourceMap": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "outDir": "./public/js/app",
-    "lib": ["es2015", "dom"]
-  },
-  "types": [
-    "./",
-    "node"
-  ],
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ]
+    "module": "ES2020",
+    "outDir": "dist/esm",
+    "target": "ES2015"
+  }
 }
