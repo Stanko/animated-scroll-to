@@ -256,9 +256,11 @@ async function animateScrollTo(
   const computedStyles = getComputedStyle(scrollBehaviorElement);
 
   WARN_ABOUT.forEach(({ property, value }) => {
-    if (computedStyles.getPropertyValue(property).includes(value)) {
+    const cssValue = computedStyles.getPropertyValue(property);
+
+    if (cssValue.includes(value)) {
       console.warn(
-        `${scrollBehaviorElement.tagName} has "${property}: ${value}" which can break animated-scroll-to's animations`
+        `${scrollBehaviorElement.tagName} has "${property}: ${cssValue}" which can break animated-scroll-to's animations`
       );
     }
   });
