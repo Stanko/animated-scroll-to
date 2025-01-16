@@ -239,20 +239,29 @@ async function animateScrollTo(
     throw 'Element to scroll needs to be either window or DOM element.';
   }
 
-  // Check for "scroll-behavior: smooth" as it can break the animation
+  // Check for a few properties that can break the animation
+  // "scroll-behavior: smooth"
+  // "scroll-snap-type: [x/y] mandatory"
   // https://github.com/Stanko/animated-scroll-to/issues/55
+  // https://github.com/Stanko/animated-scroll-to/issues/71
+  const WARN_ABOUT = [
+    { property: 'scroll-behavior', value: 'smooth' },
+    { property: 'scroll-snap-type', value: 'mandatory' },
+  ];
+
   const scrollBehaviorElement: Element = isWindow
     ? document.documentElement
     : (options.elementToScroll as Element);
-  const scrollBehavior = getComputedStyle(
-    scrollBehaviorElement
-  ).getPropertyValue('scroll-behavior');
 
-  if (scrollBehavior === 'smooth') {
-    console.warn(
-      `${scrollBehaviorElement.tagName} has "scroll-behavior: smooth" which can mess up with animated-scroll-to's animations`
-    );
-  }
+  const computedStyles = getComputedStyle(scrollBehaviorElement);
+
+  WARN_ABOUT.forEach(({ property, value }) => {
+    if (computedStyles.getPropertyValue(property).includes(value)) {
+      console.warn(
+        `${scrollBehaviorElement.tagName} has "${property}: ${value}" which can break animated-scroll-to's animations`
+      );
+    }
+  });
 
   // Select the correct scrolling interface
   const elementToScroll = isWindow

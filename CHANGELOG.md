@@ -1,5 +1,15 @@
 # Changelog
 
+### v2.3.1
+
+16.01.2025.
+
+**Added**
+
+- Added a warning that `scroll-snap-type: x mandatory` might break the animation [#71](https://github.com/Stanko/animated-scroll-to/pull/71)
+
+---
+
 ### v2.3.0
 
 23.06.2022.
