@@ -1,5 +1,15 @@
 # Changelog
 
+### v2.3.2
+
+17.01.2025.
+
+**Added**
+
+- Improved the readme. Added two sections - on scrolling iframes and CSS properties that can break the animation.
+
+---
+
 ### v2.3.1
 
 16.01.2025.
