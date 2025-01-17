@@ -17,7 +17,7 @@
     "build:cjs": "tsc -p tsconfig-cjs.json && echo '{ \"type\": \"commonjs\" }' > dist/cjs/package.json",
     "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:docs",
     "prepublishOnly": "npm test && npm run build",
-    "start": "esbuild docs/docs.ts --bundle --tsconfig=tsconfig-demo.json --servedir=docs --outdir=docs/animated-scroll-to",
+    "start": "esbuild docs/docs.ts --bundle --tsconfig=tsconfig-demo.json --servedir=docs --serve=0.0.0.0:8000 --outdir=docs/animated-scroll-to",
     "build:docs": "esbuild docs/docs.ts --bundle --tsconfig=tsconfig-demo.json --outdir=docs --minify --sourcemap",
     "test": "node test.js",
     "cypress:run": "cypress run",
