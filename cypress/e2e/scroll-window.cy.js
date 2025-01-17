@@ -142,4 +142,20 @@ describe('Scrolling the window', function () {
       }, 1000);
     }, 1000);
   });
+
+  it('checks if console.warn is called when scroll-snap-type: [x/y] mandatory is set', function () {
+    cy.visit('http://localhost:8000/test.html');
+
+    cy.document().then((doc) => {
+      doc.documentElement.style.scrollSnapType = 'x mandatory';
+
+      cy.window().then((win) => {
+        cy.get('.element-to-scroll').then((elementToScroll) => {
+          return win.animateScrollTo(1000).then(() => {
+            cy.expect(win.console.warn).to.have.callCount(1);
+          });
+        }, 1000);
+      }, 1000);
+    }, 1000);
+  });
 });
