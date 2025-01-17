@@ -5,213 +5,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-  <title>Animated window scroll to</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      color: #111;
-      font-size: 18px;
-      background-size: 100px 100px;
-      background-image: linear-gradient(to right, #ddd 1px, transparent 1px), linear-gradient(to bottom, #ddd 1px, transparent 1px);
-    }
+  <title>Animated Scroll To</title>
+  <!-- Description -->
+  <meta name="description"
+    content="Lightweight scroll to function with a powerful API. Scrolls window or any other DOM element.">
 
-    * {
-      box-sizing: border-box;
-    }
-
-    h1,
-    h2,
-    h3 {
-      font-weight: normal;
-      margin: 1.5em 0;
-    }
-
-    h1 {
-      margin-top: 15px;
-    }
-
-    p {
-      line-height: 1.4em;
-      color: #555;
-    }
-
-    a,
-    a:active,
-    a:visited,
-    a:focus {
-      color: #bD2828;
-    }
-
-    a:hover {
-      color: #841010;
-    }
-
-    .Buttons {
-      padding: 5px 20px;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      border-bottom: 1px solid #ddd;
-      background: white;
-      background: rgba(255, 255, 255, 0.85);
-    }
-
-    .Buttons span {
-      display: inline-block;
-      position: relative;
-      top: 1px;
-      margin-right: 5px;
-    }
-
-    button {
-      height: 25px;
-      border: 1px solid #ddd;
-      background: #fff;
-      border-radius: 12px;
-      padding: 0 10px
-    }
-
-    button:hover {
-      border-color: #aaa;
-      cursor: pointer;
-    }
-
-    .Page {
-      min-height: 1500px;
-    }
-
-    .Page--withText {
-      line-height: 1500px;
-      font-size: 100px;
-      text-align: center;
-    }
-
-    .Page--withElement {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 46px;
-      min-height: 100vh !important;
-    }
-
-    .Container {
-      padding: 70px 20px 50px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .ElementDemo {
-      height: 300px;
-      overflow-y: auto;
-      color: #222;
-      background: #ffffff;
-      border-radius: 4px;
-      margin: 20px 0;
-      border: 1px solid #ddd;
-    }
-
-    .ElementDemo::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-
-    }
-
-    .ElementDemo::-webkit-scrollbar-track {
-      background: #f3f4f6;
-    }
-
-    .ElementDemo::-webkit-scrollbar-thumb {
-      border-radius: 10px;
-      background: #bbb;
-    }
-
-    .ElementDemo p {
-      width: 200%;
-      margin: 20px 0;
-      padding: 0 20px;
-    }
-
-    .HorizontalDemo {
-      width: 100%;
-      overflow-x: scroll;
-      border-radius: 4px;
-      margin: 20px 0;
-      border: 1px solid #ddd;
-    }
-
-    .HorizontalDemo-content {
-      width: 2000px;
-      height: 200px;
-    }
-
-    .HorizontalElement {
-      float: left;
-      height: 100%;
-      display: block;
-      font-size: 1.6rem;
-      padding: 1rem;
-      border-right: 1px solid #ddd;
-      background-color: #fff;
-    }
-
-    .HorizontalElementToScroll:last-child {
-      border: 0;
-    }
-
-    pre {
-      color: #fff;
-      background: #333537;
-      padding: 20px;
-      border-radius: 4px;
-      font-size: 16px;
-      overflow-x: auto;
-    }
-
-    .Links a {
-      display: inline-block;
-      margin-right: 10px;
-    }
-
-    .Grey {
-      color: #aaa;
-    }
-
-    .Green {
-      color: #A6E22E;
-    }
-
-    .Purple {
-      color: #A97EF8;
-    }
-
-    .Yellow {
-      color: #E6DB74;
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 
   <!-- Icons -->
-  <link href="https://muffinman.io/favicon/red/icon-32.ico" rel="icon" sizes="any" />
-  <link href="https://muffinman.io/favicon/red/icon.svg" rel="icon" type="image/svg+xml" />
-  <link href="https://muffinman.io/favicon/red/icon-180.png" rel="apple-touch-icon" />
-  <link href="https://muffinman.io/favicon/red/manifest.webmanifest" rel="manifest" />
+  <link href="https://muffinman.io/favicon/purple/icon-32.ico" rel="icon" sizes="any">
+  <link href="https://muffinman.io/favicon/purple/icon.svg" rel="icon" type="image/svg+xml">
+  <link href="https://muffinman.io/favicon/purple/icon-180.png" rel="apple-touch-icon">
+  <link href="https://muffinman.io/favicon/purple/manifest.webmanifest" rel="manifest">
 </head>
 
-<body>
-  <div class="Buttons">
-    <span>Scroll to</span>
-    <button onclick="animateScrollTo(0)">0</button>
-    <button onclick="animateScrollTo(100)">100</button>
-    <button onclick="animateScrollTo(1500)">1500</button>
-    <button onclick="animateScrollTo(6000)">6k</button>
-    <button onclick="animateScrollTo(20000)">20k</button>
-    <button onclick="animateScrollTo(document.querySelector('.Page--withElement'))">To element</button>
-  </div>
-  <div class="Page">
-    <div class="Container">
-      <div class="Links">
+<body class="bg">
+  <div class="page">
+    <div class="container">
+      <nav class="links">
         <a href="https://muffinman.io/">My Blog</a>
         <a href="https://github.com/Stanko/animated-scroll-to">
           GitHub
@@ -219,61 +30,72 @@
         <a href="https://www.npmjs.com/package/animated-scroll-to">
           npm
         </a>
-      </div>
-      <h1>animated-scroll-to demo</h1>
+      </nav>
+
+      <h1>Animated Scroll To</h1>
 
       <p>
-        Lightweight (1.45kb gzipped) scroll to function with a powerful API. Scrolls window or any other DOM element.
+        Lightweight (1.9kb gzipped) scroll to function with a powerful API. Scrolls window or any other DOM element.
         Documentation on <a href="https://github.com/Stanko/animated-scroll-to">GitHub</a>.
       </p>
 
-      <b>Window</b>
-      <p>Use buttons at the top of the page to scroll window</p>
+      <h2><span class="star" aria-hidden="true">✦</span>Window</h2>
+      <p>Use buttons at the bottom of the page to scroll the page.</p>
 
-      <b>Custom DOM element</b>
-      <p>Use buttons beneath to scroll element</p>
+      <h2><span class="star" aria-hidden="true">✦</span>DOM element</h2>
+      <p>Use buttons beneath to scroll the div below.</p>
 
-
-      <div>
+      <div class="button-group">
         <b>Scroll vertically: </b>
-        <button onclick="animateScrollTo(0, { elementToScroll: document.querySelector('.ElementDemo') })">0</button>
-        <button onclick="animateScrollTo(100, { elementToScroll: document.querySelector('.ElementDemo') })">100</button>
-        <button onclick="animateScrollTo(500, { elementToScroll: document.querySelector('.ElementDemo') })">500</button>
-        <button
-          onclick="animateScrollTo(1000, { elementToScroll: document.querySelector('.ElementDemo') })">1000</button>
+        <div>
+          <button onclick="animateScrollTo(0, { elementToScroll: document.querySelector('.element-demo') })">0</button>
+          <button
+            onclick="animateScrollTo(100, { elementToScroll: document.querySelector('.element-demo') })">100</button>
+          <button
+            onclick="animateScrollTo(500, { elementToScroll: document.querySelector('.element-demo') })">500</button>
+          <button
+            onclick="animateScrollTo(1000, { elementToScroll: document.querySelector('.element-demo') })">1000</button>
+        </div>
       </div>
 
-      <div>
+      <div class="button-group">
         <b>Scroll horizontally: </b>
-        <button onclick="animateScrollTo([0, null], { elementToScroll: document.querySelector('.ElementDemo') })">[0,
-          null]</button>
-        <button
-          onclick="animateScrollTo([200, null], { elementToScroll: document.querySelector('.ElementDemo') })">[200,
-          null]</button>
-        <button
-          onclick="animateScrollTo([1000, null], { elementToScroll: document.querySelector('.ElementDemo') })">[1000,
-          null]</button>
+        <div>
+          <button onclick="animateScrollTo([0, null], { elementToScroll: document.querySelector('.element-demo') })">[0,
+            null]</button>
+          <button
+            onclick="animateScrollTo([200, null], { elementToScroll: document.querySelector('.element-demo') })">[200,
+            null]</button>
+          <button
+            onclick="animateScrollTo([1000, null], { elementToScroll: document.querySelector('.element-demo') })">[1000,
+            null]</button>
+        </div>
       </div>
 
-      <div>
+      <div class="button-group">
         <b>Scroll diagonally: </b>
-        <button onclick="animateScrollTo([0, 0], { elementToScroll: document.querySelector('.ElementDemo') })">[0,
-          0]</button>
-        <button onclick="animateScrollTo([500, 500], { elementToScroll: document.querySelector('.ElementDemo') })">[500,
-          500]</button>
-        <button
-          onclick="animateScrollTo([1000, 1000], { elementToScroll: document.querySelector('.ElementDemo') })">[1000,
-          1000]</button>
+        <div>
+          <button onclick="animateScrollTo([0, 0], { elementToScroll: document.querySelector('.element-demo') })">[0,
+            0]</button>
+          <button
+            onclick="animateScrollTo([500, 500], { elementToScroll: document.querySelector('.element-demo') })">[500,
+            500]</button>
+          <button
+            onclick="animateScrollTo([1000, 1000], { elementToScroll: document.querySelector('.element-demo') })">[1000,
+            1000]</button>
+        </div>
       </div>
 
-      <div>
+      <div class="button-group">
         <b>Scroll to element: </b>
-        <button
-          onclick="animateScrollTo(document.querySelector('.ElementDemo-element'), { elementToScroll: document.querySelector('.ElementDemo') })">To
-          element</button>
+        <div>
+          <button
+            onclick="animateScrollTo(document.querySelector('.element-demo-element'), { elementToScroll: document.querySelector('.element-demo') })">To
+            element</button>
+        </div>
       </div>
 
-      <div class="ElementDemo">
+      <div class="element-demo">
         <p>Use buttons above to scroll this element</p>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -316,7 +138,7 @@
           vestibulum pretium laoreet. Nam magna magna, dignissim volutpat augue
           non, imperdiet feugiat odio.
         </p>
-        <p class='ElementDemo-element'>
+        <p class='element-demo-element'>
           Scroll to me! Vivamus suscipit fermentum lorem, sit amet lacinia ex accumsan nec.
           Vivamus iaculis, neque sed auctor congue, risus ipsum laoreet odio,
           eu mollis dolor justo elementum dui. Praesent facilisis eleifend
@@ -398,19 +220,30 @@
       </div>
     </div>
   </div>
-  <div class="Page Page--withText">1</div>
-  <div class="Page Page--withText">2</div>
-  <div class="Page Page--withText">3</div>
-  <div class="Page Page--withText">4</div>
-  <div class="Page Page--withText">5</div>
-  <div class="Page Page--withText">6</div>
-  <div class="Page Page--withElement">Page with element</div>
-  <div class="Page Page--withText">7</div>
-  <div class="Page Page--withText">8</div>
-  <div class="Page Page--withText">9</div>
+  <div class="page page--text ">1</div>
+  <div class="page page--text bg purple">2</div>
+  <div class="page page--text bg red">3</div>
+  <div class="page page--text bg yellow">4</div>
+  <div class="page page--text bg green">5</div>
+  <div class="page page--text ">6</div>
+  <div class="page page--element bg purple ">Page with element</div>
+  <div class="page page--text bg red">7</div>
+  <div class="page page--text bg yellow">8</div>
+  <div class="page page--text bg green">9</div>
+
+  <div class="buttons">
+    <div class="buttons-container">
+      <div class="buttons-scroll-to-label">Scroll window to:</div>
+      <button onclick="animateScrollTo(0)">0</button>
+      <button onclick="animateScrollTo(100)">100</button>
+      <button onclick="animateScrollTo(1500)">1.5k</button>
+      <button onclick="animateScrollTo(6000)">6k</button>
+      <button onclick="animateScrollTo(20000)">20k</button>
+      <button onclick="animateScrollTo(document.querySelector('.page--element'))">To element</button>
+    </div>
+  </div>
 
   <!-- polyfill for ie -->
-  <script src="https://unpkg.com/es6-promise/dist/es6-promise.auto.min.js"></script>
   <script src="/animated-scroll-to/docs.js"></script>
 </body>
 

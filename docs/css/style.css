@@ -1,0 +1,282 @@
+:root {
+  --blue: hsl(233, 60%, 84%);
+  --purple: hsl(260, 60%, 87%);
+  --red: hsl(300, 60%, 90%);
+  --yellow: hsl(46, 80%, 87%);
+  --green: hsl(140, 50%, 87%);
+
+  --thumb: rgba(0, 0, 0, 0.3);
+
+  --text: #323438;
+
+  --accent: #3c00d3;
+
+  --max-width: 650px;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa,
+    Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri,
+    source-sans-pro, sans-serif;
+  font-weight: normal;
+  color: #111;
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: var(--blue);
+}
+
+.bg {
+  background-size: 750px;
+  background-image: url('../img/isolines.svg');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--accent);
+}
+
+h1 {
+  font-size: 1.625rem;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.25rem;
+  margin: 1.5em 0 0.5em;
+  font-weight: normal;
+}
+
+@media (min-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+p {
+  color: var(--text);
+}
+
+a,
+a:active,
+a:visited,
+a:focus {
+  color: var(--accent);
+  text-decoration: none;
+  border-radius: 2px;
+  outline-offset: 4px;
+  opacity: 0.75;
+}
+
+a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.star {
+  color: var(--accent);
+  display: inline-block;
+  position: relative;
+  margin-right: 0.5rem;
+}
+
+.buttons {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  font-size: 0.875rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.buttons-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+}
+
+.buttons-scroll-to-label {
+  font-weight: 500;
+  flex: 0 0 100%;
+}
+
+@media (min-width: 600px) {
+  .buttons-container {
+    padding: 15px 20px;
+  }
+
+  .buttons-scroll-to-label {
+    flex-basis: auto;
+  }
+}
+
+button {
+  height: 25px;
+  border: none;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  padding: 0 10px;
+}
+
+button:hover {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  gap: 4px;
+}
+
+.button-group div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (min-width: 600px) {
+  .button-group {
+    flex-direction: row;
+  }
+
+  .button-group b {
+    flex: 0 0 10rem;
+  }
+}
+
+.page {
+  min-height: 1500px;
+}
+
+.page--text {
+  line-height: 1500px;
+  font-size: 100px;
+  text-align: center;
+}
+
+.page--element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 46px;
+  min-height: 100vh !important;
+}
+
+.container {
+  padding: 50px 20px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.element-demo {
+  height: 300px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  margin: 20px 0;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumb) transparent;
+}
+
+.element-demo::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.element-demo::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+.element-demo::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: var(--thumb);
+}
+
+.element-demo p {
+  width: 200%;
+  margin: 20px 0;
+  padding: 0 20px;
+}
+
+.horizontalDemo {
+  width: 100%;
+  overflow-x: scroll;
+  border-radius: 4px;
+  margin: 20px 0;
+  border: 1px solid #ddd;
+}
+
+.horizontalDemo-content {
+  width: 2000px;
+  height: 200px;
+}
+
+.horizontalElement {
+  float: left;
+  height: 100%;
+  display: block;
+  font-size: 1.6rem;
+  padding: 1rem;
+  border-right: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.horizontalElementToScroll:last-child {
+  border: 0;
+}
+
+pre {
+  color: #fff;
+  background: #333537;
+  padding: 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  overflow-x: auto;
+}
+
+.links a {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.blue {
+  background-color: var(--blue);
+}
+
+.purple {
+  background-color: var(--purple);
+}
+
+.red {
+  background-color: var(--red);
+}
+
+.yellow {
+  background-color: var(--yellow);
+}
+
+.green {
+  background-color: var(--green);
+}

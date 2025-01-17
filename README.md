@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/animated-scroll-to.svg?style=flat-square)](https://www.npmjs.com/package/animated-scroll-to)
 [![npm downloads](https://img.shields.io/npm/dm/animated-scroll-to.svg?style=flat-square)](https://www.npmjs.com/package/animated-scroll-to)
 
-Lightweight (1.45kb gzipped) scroll to function with a powerful API. Scrolls window or any other DOM element.
+Lightweight (1.9kb gzipped) scroll to function with a powerful API. Scrolls window or any other DOM element.
 
 The main difference to other libraries is that it accepts speed of scrolling instead of duration. This way scrolling for 200 pixels will last less than scrolling 10000 pixels. Minimum and maximum duration are configurable and set to reasonable defaults (250 and 3000ms).
 
